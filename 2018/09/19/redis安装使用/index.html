@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>大腿的博客</title>
+    <title>redis安装使用 · 大腿的博客</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >大腿的博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">redis安装使用</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>大腿的博客</a>
 </header>
@@ -220,24 +231,78 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(https://source.unsplash.com/random)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            redis安装使用
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "redis">redis</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "springboot">springboot</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "java">java</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">494</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/09/19</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,39 +403,66 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/09/14/markdown-0/" >
-            
-                <span>markdown 语法</span>
-        </a>
-        <div class="abstract-content">
-            <p>第一篇博客，记录博客写法。博客使用<a href="http://www.markdown.cn/" target="_blank" rel="noopener">markdown</a>语法，本文记录其大致语法规范<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/14</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "markdown">markdown</a>
-    
-</div>
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>做手机短信验证的时候，考虑验证码的存放问题使用说明方式。因为验证码的时效性，放入关系数据库可以实现，但是较麻烦。最终想到缓存可以完美实现，正好没用过也想学redis，就顺带学习redis使用和安装。<br><a id="more"></a></p>
+<h1 id="Redis简介"><a href="#Redis简介" class="headerlink" title="Redis简介"></a>Redis简介</h1><p>Redis 是一个开源（BSD许可）的，内存中的数据结构存储系统，它可以用作数据库、缓存和消息中间件。 它支持多种类型的数据结构，如 字符串（strings）， 散列（hashes）， 列表（lists）， 集合（sets）， 有序集合（sorted sets） 与范围查询， bitmaps， hyperloglogs 和 地理空间（geospatial） 索引半径查询。 Redis 内置了 复制（replication），LUA脚本（Lua scripting）， LRU驱动事件（LRU eviction），事务（transactions） 和不同级别的 磁盘持久化（persistence）， 并通过 Redis哨兵（Sentinel）和自动 分区（Cluster）提供高可用性（high availability）。<br>中文官网：<a href="http://www.redis.cn/" target="_blank" rel="noopener">http://www.redis.cn/</a></p>
+<h1 id="Redis应用场景"><a href="#Redis应用场景" class="headerlink" title="Redis应用场景"></a>Redis应用场景</h1><p>参考<a href="https://www.cnblogs.com/NiceCui/p/7794659.html" target="_blank" rel="noopener">https://www.cnblogs.com/NiceCui/p/7794659.html</a></p>
+<h1 id="Redis-Windows-安装"><a href="#Redis-Windows-安装" class="headerlink" title="Redis Windows 安装"></a>Redis Windows 安装</h1><p>下载链接: <a href="https://github.com/MicrosoftArchive/redis/releases" target="_blank" rel="noopener">https://github.com/MicrosoftArchive/redis/releases</a><br>1.redis本身没有提供微软的redis，windows下的redis由微软自己提供的。点击下载链接 找到redis-x64-*.zip点击下载。<br>2.解压文件到自己制定的位置，我放在E:\Redis目录下，至此redis安装完成</p>
+<h1 id="Redis-使用"><a href="#Redis-使用" class="headerlink" title="Redis 使用"></a>Redis 使用</h1><ol>
+<li>win+r 输入cmd打开命令工具</li>
+<li><p>进入安装目录启动redis 命令：redis-server.exe redis.windows.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E:</span><br><span class="line">CD Redis</span><br><span class="line">redis-server.exe redis.windows.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli.exe -h 127.0.0.1 -p 6379</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>-h 127.0.0.1 是host<br>-p 6379 是端口<br>插入键值对试一下 set key value,对应键值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set name shiyuquan</span><br></pre></td></tr></table></figure></p>
+<p>查看指定键的值 get key<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get name</span><br></pre></td></tr></table></figure></p>
+<p>得到结果 shiyuquan</p>
+<p>redis命令参考 <a href="http://www.redis.net.cn/order/" target="_blank" rel="noopener">http://www.redis.net.cn/order/</a></p>
+<h1 id="Redis-图形界面"><a href="#Redis-图形界面" class="headerlink" title="Redis 图形界面"></a>Redis 图形界面</h1><p>市面上的图形界面有很多，我这里选用了国人开发的<a href="http://www.treesoft.cn/dms.html" target="_blank" rel="noopener">TreeNMS</a><br>进官网，下载TreeNMS for Redis<br>解压zip到你指定的位置，进去看<code>说明.txt</code>跟着做就行</p>
+
     </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://shiyuquan.github.io">大腿君的大腿君</a>
+            <p>原文链接：<a href="https://shiyuquan.github.io/2018/09/19/redis安装使用/">https://shiyuquan.github.io/2018/09/19/redis安装使用/</a>
+            <p>发表日期：<a href="https://shiyuquan.github.io/2018/09/19/redis安装使用/">2018-09-19 09:59:54</a>
+            <p>更新日期：<a href="https://shiyuquan.github.io/2018/09/19/redis安装使用/">2018-09-19 10:51:13</a>
+            <p>版权声明：来自于<a rel="license" href="">大腿</a>的许可</p>
+        </div>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">下一篇</div>
+                <a href= "/2018/09/14/markdown-0/" title= "markdown 语法">
+                    <div class="prevTitle">markdown 语法</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -459,6 +551,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis简介"><span class="toc-number">1.</span> <span class="toc-text">Redis简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis应用场景"><span class="toc-number">2.</span> <span class="toc-text">Redis应用场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis-Windows-安装"><span class="toc-number">3.</span> <span class="toc-text">Redis Windows 安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis-使用"><span class="toc-number">4.</span> <span class="toc-text">Redis 使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis-图形界面"><span class="toc-number">5.</span> <span class="toc-text">Redis 图形界面</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -594,6 +704,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
