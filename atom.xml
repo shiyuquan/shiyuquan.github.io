@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://shiyuquan.github.io/"/>
-  <updated>2018-10-22T09:05:22.452Z</updated>
+  <updated>2018-10-22T09:11:30.532Z</updated>
   <id>https://shiyuquan.github.io/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>学习路线</title>
+    <link href="https://shiyuquan.github.io/2018/10/22/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/"/>
+    <id>https://shiyuquan.github.io/2018/10/22/学习路线/</id>
+    <published>2018-10-22T09:08:55.000Z</published>
+    <updated>2018-10-22T09:11:30.532Z</updated>
+    
+    <content type="html"><![CDATA[<p>厉害的人总是让人惊叹，也不能慢了自己的脚步<br><a id="more"></a></p><p>大致学习路线，根据某博主的建议，感觉挺好，中间肯定会有顺序上的调节和合并学习点的进行。<br>Java基础的升级版<br>– 《Java编程思想》</p><p>设计模式相关<br>– 《head first设计模式》，《大话设计模式》</p><p>代码优化重构<br>– 《重构 改善既有代码的设计》，《effective java》</p><p>虚拟机相关<br>– 《深入理解Java虚拟机》</p><p>并发编程<br>– 《Java并发编程实战》</p><p>jdk<br>– 源码</p><p>制造轮子<br>– 待定…</p><p>选定方向，深度发展</p><p>–<br>中间还应该学习的：<br>spring源码<br>微服务(springcloud,dubbo)<br>性能优化<br>数据库<br>中间件：消息(activemq,rabbitmq,kafuka)，搜索(es4,solr3,lucene2)，缓存(redis)</p><p>然后，基础：算法，数据结构，计算机网络，编译原理<br>方向：ai，虚拟化，大数据等方向等等等等</p><p>想到什么写什么，再做修改。</p><p><img src="https://source.unsplash.com/random" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;厉害的人总是让人惊叹，也不能慢了自己的脚步&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>心怀畏惧，砥砺前行</title>
