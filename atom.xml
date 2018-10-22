@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://shiyuquan.github.io/"/>
-  <updated>2018-10-14T09:23:34.288Z</updated>
+  <updated>2018-10-22T09:05:22.452Z</updated>
   <id>https://shiyuquan.github.io/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>心怀畏惧，砥砺前行</title>
+    <link href="https://shiyuquan.github.io/2018/10/22/%E5%BF%83%E6%80%80%E7%95%8F%E6%83%A7%EF%BC%8C%E7%A0%A5%E7%A0%BA%E5%89%8D%E8%A1%8C/"/>
+    <id>https://shiyuquan.github.io/2018/10/22/心怀畏惧，砥砺前行/</id>
+    <published>2018-10-22T09:00:39.000Z</published>
+    <updated>2018-10-22T09:05:22.452Z</updated>
+    
+    <content type="html"><![CDATA[<p>一篇杂谈，一点感触<br><a id="more"></a></p><p>今天公司相关负责人说要来前端新人，引起的话题。<br>公司内有个大神，对java底层了解很深（在我看来），我一直以为他是工作多年的，结果聊天的时候才了解到，人家只是两年的开发经验，并且做开发之前是学物理数学的…当时我就惊到了，和我想的出入太大，毕竟在我眼里，他底层了解是我所仰望的星空…<br>突然感到了点无奈和迷茫。在又了解到我的所属上司也就开发三年（我一直以为他有五年…）并且在我眼里springcloud流地飞起的他，其实学习springcloud也就三两个月…说实话，有点伤感，莫名地有股无力感从心底发出…我能赶上他们吗…<br>优秀的人往往就潜伏在身边。自以为是的遮罩让人看不清现实，偶然间的一瞥却又让你心生畏惧！<br>技不如人，也不思进取？<br>非也。心怀畏惧，砥砺前行。<br><img src="https://source.unsplash.com/random" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一篇杂谈，一点感触&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="杂谈" scheme="https://shiyuquan.github.io/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
   
   <entry>
     <title>springboot hibernate处理text格式数据</title>
