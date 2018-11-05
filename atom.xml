@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://shiyuquan.github.io/"/>
-  <updated>2018-10-23T02:54:12.649Z</updated>
+  <updated>2018-11-05T04:39:21.835Z</updated>
   <id>https://shiyuquan.github.io/</id>
   
   <author>
@@ -15,6 +15,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>java类加载顺序</title>
+    <link href="https://shiyuquan.github.io/2018/11/05/java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F/"/>
+    <id>https://shiyuquan.github.io/2018/11/05/java类加载顺序/</id>
+    <published>2018-11-05T03:06:01.000Z</published>
+    <updated>2018-11-05T04:39:21.835Z</updated>
+    
+    <content type="html"><![CDATA[<p>阅读《java编程思想》看到了java类加载的一点东西，通过查阅资料总结一下我对java类加载顺序的个人理解<br><a id="more"></a></p><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><h2 id="初始化顺序"><a href="#初始化顺序" class="headerlink" title="初始化顺序:"></a>初始化顺序:</h2><ol><li>为静态变量、方法分配内存并赋值(静态方法后面大括号语句不执行，只初始化),执行静态代码块(立刻执行大括号里面的语句)。静态加载顺序自上而下。</li><li>初始化构造方法(只初始化，等待非静态属性加载)</li><li>为非静态属性分配内存并赋值</li><li>执行构造代码块(构造代码块在每次创建对象的时候都会执行一次)</li><li>执行构造方法</li><li>非静态代码块 或 静态方法(调用才加载)。</li></ol><h2 id="如果有继承关系"><a href="#如果有继承关系" class="headerlink" title="如果有继承关系"></a>如果有继承关系</h2><ol><li>父类静态方法成员变量代码块</li><li>子类静态方法成员变量代码块</li><li>父类构造方法初始化</li><li>子类构造方法初始化</li><li>父类非静态属性分配内存并赋值</li><li>子类非静态属性分配内存并赋值</li><li>执行父类构造代码块</li><li>执行父类构造方法</li><li>执行子类构造代码块</li><li>执行子类构造方法</li></ol><p>接口、内部类等，调用时加载</p><h2 id="main方法怎么执行的呢？"><a href="#main方法怎么执行的呢？" class="headerlink" title="main方法怎么执行的呢？"></a>main方法怎么执行的呢？</h2><p>参考博客(<a href="https://www.cnblogs.com/iceAeterNa/p/4876940.html" target="_blank" rel="noopener">https://www.cnblogs.com/iceAeterNa/p/4876940.html</a>)</p><blockquote><p>java应用程序的启动在在/hotspot/src/share/tools/launcher/java.c的main()函数中，而在虚拟机初始化过程中，将创建并启动Java的Main线程。最后将调用JNIEnv的CallStaticVoidMethod()来执行main方法。<br>CallStaticVoidMethod()对应的jni函数为jni_CallStaticVoidMethod，定义在/hotspot/src/share/vm/prims/jni.cpp中，而jni_CallStaticVoidMethod()又调用了jni_invoke_static()，jni_invoke_static()通过JavaCalls的call()发起对Java方法的调用</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;阅读《java编程思想》看到了java类加载的一点东西，通过查阅资料总结一下我对java类加载顺序的个人理解&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="java" scheme="https://shiyuquan.github.io/tags/java/"/>
+    
+      <category term="jvm" scheme="https://shiyuquan.github.io/tags/jvm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>学习工作中遇见的异常</title>
+    <link href="https://shiyuquan.github.io/2018/11/01/%E5%AD%A6%E4%B9%A0%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E8%A7%81%E7%9A%84%E5%BC%82%E5%B8%B8/"/>
+    <id>https://shiyuquan.github.io/2018/11/01/学习工作中遇见的异常/</id>
+    <published>2018-11-01T01:47:06.000Z</published>
+    <updated>2018-11-01T01:49:00.672Z</updated>
+    
+    <content type="html"><![CDATA[<p>自二〇一八年十一月一日 农历九月廿四 始<br><a id="more"></a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;自二〇一八年十一月一日 农历九月廿四 始&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="其他" scheme="https://shiyuquan.github.io/tags/%E5%85%B6%E4%BB%96/"/>
+    
+  </entry>
   
   <entry>
     <title>为什么c++比java快</title>

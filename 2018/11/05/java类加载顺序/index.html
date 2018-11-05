@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>springboot hibernate处理text格式数据 · 大腿的博客</title>
+    <title>java类加载顺序 · 大腿的博客</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/" >大腿的博客</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">springboot hibernate处理text格式数据</a>
+                <a href="#" class="post-name">java类加载顺序</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            springboot hibernate处理text格式数据
+            java类加载顺序
             <!-- 404 -->
             
         </h1>
@@ -268,20 +268,18 @@ height:50vh;
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "java">java</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "springboot">springboot</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "hibernate">hibernate</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "jvm">jvm</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">924</span>阅读时长: <span class="post-count reading-time">3 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">433</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/10/14</span>
+                    <span class="post-intro-time">2018/11/05</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -405,38 +403,41 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>写博客网站，数据库用mysql，对博文数据的存储采用的数据类型为text，持久层框架用的hibernate，一切看似平静，然而…..<br><a id="more"></a></p>
-<h1 id="问题初现"><a href="#问题初现" class="headerlink" title="问题初现"></a>问题初现</h1><p>直接上代码<br>实体类对应字段<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Column</span>(name = <span class="string">"md_content"</span>)</span><br><span class="line"><span class="keyword">private</span> String md;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Column</span>(name = <span class="string">"html_content"</span>)</span><br><span class="line"><span class="keyword">private</span> String html;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Column</span>(name = <span class="string">"summary"</span>)</span><br><span class="line"><span class="keyword">private</span> String summary;</span><br></pre></td></tr></table></figure></p>
-<p>jpa<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ArticleRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">Article</span>, <span class="title">Long</span>&gt;, <span class="title">JpaSpecificationExecutor</span>&lt;<span class="title">Article</span>&gt; </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>正常来说，单表的增删改我都是用的jpa直接处理，并且成功，但是！！！这里不正常！！！<br><img src="/images/text处理1.png" alt=""><br>通过断点查看，可以发现，数据通过jpa已经查出来了，但是映射不到实体类最终导致报错。<br><img src="/images/text处理2.png" alt=""><br>类型定义错误…<br>毫无头绪的错误，jpa之前用得舒舒服服的呀。抱着试一试的心态，用jdbctemplate写sql查询一次看看<br><img src="/images/text处理3.png" alt=""><br>emmmm，这tm什么鬼，summary有数据，md和html都没有…what？</p>
-<h1 id="锁定问题"><a href="#锁定问题" class="headerlink" title="锁定问题"></a>锁定问题</h1><p>通过上一步的查看，发现是数据库text格式的数据出的错，于是百度谷歌走一遭呗。<br>最终得到结果</p>
+        <p>阅读《java编程思想》看到了java类加载的一点东西，通过查阅资料总结一下我对java类加载顺序的个人理解<br><a id="more"></a></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><h2 id="初始化顺序"><a href="#初始化顺序" class="headerlink" title="初始化顺序:"></a>初始化顺序:</h2><ol>
+<li>为静态变量、方法分配内存并赋值(静态方法后面大括号语句不执行，只初始化),执行静态代码块(立刻执行大括号里面的语句)。静态加载顺序自上而下。</li>
+<li>初始化构造方法(只初始化，等待非静态属性加载)</li>
+<li>为非静态属性分配内存并赋值</li>
+<li>执行构造代码块(构造代码块在每次创建对象的时候都会执行一次)</li>
+<li>执行构造方法</li>
+<li>非静态代码块 或 静态方法(调用才加载)。</li>
+</ol>
+<h2 id="如果有继承关系"><a href="#如果有继承关系" class="headerlink" title="如果有继承关系"></a>如果有继承关系</h2><ol>
+<li>父类静态方法成员变量代码块</li>
+<li>子类静态方法成员变量代码块</li>
+<li>父类构造方法初始化</li>
+<li>子类构造方法初始化</li>
+<li>父类非静态属性分配内存并赋值</li>
+<li>子类非静态属性分配内存并赋值</li>
+<li>执行父类构造代码块</li>
+<li>执行父类构造方法</li>
+<li>执行子类构造代码块</li>
+<li>执行子类构造方法</li>
+</ol>
+<p>接口、内部类等，调用时加载</p>
+<h2 id="main方法怎么执行的呢？"><a href="#main方法怎么执行的呢？" class="headerlink" title="main方法怎么执行的呢？"></a>main方法怎么执行的呢？</h2><p>参考博客(<a href="https://www.cnblogs.com/iceAeterNa/p/4876940.html" target="_blank" rel="noopener">https://www.cnblogs.com/iceAeterNa/p/4876940.html</a>)</p>
 <blockquote>
-<p>hibernate对mysql数据库的数据类型映射里面，没有text…</p>
+<p>java应用程序的启动在在/hotspot/src/share/tools/launcher/java.c的main()函数中，而在虚拟机初始化过程中，将创建并启动Java的Main线程。最后将调用JNIEnv的CallStaticVoidMethod()来执行main方法。<br>CallStaticVoidMethod()对应的jni函数为jni_CallStaticVoidMethod，定义在/hotspot/src/share/vm/prims/jni.cpp中，而jni_CallStaticVoidMethod()又调用了jni_invoke_static()，jni_invoke_static()通过JavaCalls的call()发起对Java方法的调用</p>
 </blockquote>
-<p>心累，感觉这不像是hibernate该有的bug，但是谁让他就是不支持呢<br>解决方法有两个</p>
-<ol>
-<li>一是改变hibernate方言，将text支持引用进去。本地写个类，继承MySQL5Dialect，添加注册<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomDialect</span> <span class="keyword">extends</span> <span class="title">MySQL5Dialect</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CustomDialect</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        registerHibernateType(Types.DECIMAL, Hibernate.BIG_DECIMAL.getName());</span><br><span class="line">        registerHibernateType(Types.LONGVARCHAR,Hibernate.TEXT.getName());</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>然后改配置文件的方言为本地改的这个就行…看似完美，呵呵<br>你会发现<code>Hibernate</code>包下没有<code>TEXT</code>这东东，你去<code>Hibernate.TEXT.getName()</code>你点一辈子都没用，我在想网上的人是怎么Hibernate.出来东西的，我这里的 TEXT出轨了？？？</p>
-<ol start="2">
-<li>好吧，第二种，也是我这里实现的初版，给实体类字段加注解,其中 <code>columnDefinition=&quot;TEXT&quot;</code>也是上一个解决方式要加的，因为上一个方法死娘胎里了就没讲。<br>代码<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里@Lob注解表示属性将被持久化为Blob或者Clob类型，有人说lob是large object，emmm姑且相信吧，text也是lob的一类</span></span><br><span class="line"><span class="meta">@Lob</span></span><br><span class="line"><span class="comment">// 懒加载，因为lob数据可能比较大，懒加载让他要用的时候再加载，提高性能。</span></span><br><span class="line"><span class="meta">@Basic</span>(fetch = FetchType.LAZY)</span><br><span class="line"><span class="comment">// columnDefinition属性表示创建表时，该字段创建的SQL语句，一般用于通过Entity生成表定义时使用。表示对应数据库的text类型</span></span><br><span class="line"><span class="meta">@Column</span>(name = <span class="string">"md_content"</span>, columnDefinition=<span class="string">"TEXT"</span>)</span><br><span class="line"><span class="keyword">private</span> String md;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Lob</span></span><br><span class="line"><span class="meta">@Basic</span>(fetch = FetchType.LAZY)</span><br><span class="line"><span class="meta">@Column</span>(name = <span class="string">"md_content"</span>, columnDefinition=<span class="string">"TEXT"</span>)</span><br><span class="line"><span class="keyword">private</span> String html;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Lob</span></span><br><span class="line"><span class="meta">@Basic</span>(fetch = FetchType.LAZY)</span><br><span class="line"><span class="meta">@Column</span>(name = <span class="string">"summary"</span>, columnDefinition=<span class="string">"TEXT"</span>)</span><br><span class="line"><span class="keyword">private</span> String summary;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>至此，text的处理基本上完成了<br>对的，基本上</p>
-<h1 id="额外的bug"><a href="#额外的bug" class="headerlink" title="额外的bug"></a>额外的bug</h1><p>发现进过上面的处理，依旧有两个字段没有值，就是一开始的md和html，通过瞎改改解决了，上代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Lob</span></span><br><span class="line"><span class="meta">@Basic</span>(fetch = FetchType.LAZY)</span><br><span class="line"><span class="meta">@Column</span>(name = <span class="string">"md"</span>, columnDefinition=<span class="string">"TEXT"</span>)</span><br><span class="line"><span class="comment">//@Column(name = "md_content", columnDefinition="TEXT")</span></span><br><span class="line"><span class="keyword">private</span> String md;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Lob</span></span><br><span class="line"><span class="meta">@Basic</span>(fetch = FetchType.LAZY)</span><br><span class="line"><span class="meta">@Column</span>(name = <span class="string">"html"</span>, columnDefinition=<span class="string">"TEXT"</span>)</span><br><span class="line"><span class="comment">//@Column(name = "html_content", columnDefinition="TEXT")</span></span><br><span class="line"><span class="keyword">private</span> String html;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Lob</span></span><br><span class="line"><span class="meta">@Basic</span>(fetch = FetchType.LAZY)</span><br><span class="line"><span class="meta">@Column</span>(name = <span class="string">"summary"</span>, columnDefinition=<span class="string">"TEXT"</span>)</span><br><span class="line"><span class="keyword">private</span> String summary;</span><br></pre></td></tr></table></figure></p>
-<p>将column对应的数据库子弹的下划线去掉就可以，至于为什么嘛，我也不懂T-T</p>
-<h1 id="最终总结"><a href="#最终总结" class="headerlink" title="最终总结"></a>最终总结</h1><p>到现在，依旧没有实现用jpa查询text类型的数据，因为text加不进hibernate方言里面。jdbctemplate可以实现了，然后改了个地方<br>下面是我最终的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Lob</span></span><br><span class="line"><span class="meta">@Basic</span>(fetch = FetchType.LAZY)</span><br><span class="line"><span class="meta">@Column</span>(name = <span class="string">"md"</span>, columnDefinition=<span class="string">"CLOB"</span>)</span><br><span class="line"><span class="keyword">private</span> String md;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Lob</span></span><br><span class="line"><span class="meta">@Basic</span>(fetch = FetchType.LAZY)</span><br><span class="line"><span class="meta">@Column</span>(name = <span class="string">"html"</span>, columnDefinition=<span class="string">"CLOB"</span>)</span><br><span class="line"><span class="keyword">private</span> String html;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Lob</span></span><br><span class="line"><span class="meta">@Basic</span>(fetch = FetchType.LAZY)</span><br><span class="line"><span class="meta">@Column</span>(name = <span class="string">"summary"</span>, columnDefinition=<span class="string">"CLOB"</span>)</span><br><span class="line"><span class="keyword">private</span> String summary;</span><br></pre></td></tr></table></figure></p>
-<p>我把text改成了clob，因为hibernate没有text支持所以我觉得还是写clob可能会好点<br>在一个就是为什么字段设置下划线查不出数据。还有待调查。</p>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者：<a href="https://shiyuquan.github.io">大腿君的大腿君</a>
-            <p>原文链接：<a href="https://shiyuquan.github.io/2018/10/14/springboot-hibernate处理text格式数据/">https://shiyuquan.github.io/2018/10/14/springboot-hibernate处理text格式数据/</a>
-            <p>发表日期：<a href="https://shiyuquan.github.io/2018/10/14/springboot-hibernate处理text格式数据/">2018-10-14 15:56:19</a>
-            <p>更新日期：<a href="https://shiyuquan.github.io/2018/10/14/springboot-hibernate处理text格式数据/">2018-10-14 17:23:34</a>
+            <p>原文链接：<a href="https://shiyuquan.github.io/2018/11/05/java类加载顺序/">https://shiyuquan.github.io/2018/11/05/java类加载顺序/</a>
+            <p>发表日期：<a href="https://shiyuquan.github.io/2018/11/05/java类加载顺序/">2018-11-05 11:06:01</a>
+            <p>更新日期：<a href="https://shiyuquan.github.io/2018/11/05/java类加载顺序/">2018-11-05 12:39:21</a>
             <p>版权声明：来自于<a rel="license" href="">大腿</a>的许可</p>
         </div>
     
@@ -444,17 +445,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">上一篇</div>
-                <a href= "/2018/10/22/心怀畏惧，砥砺前行/" title= "心怀畏惧，砥砺前行">
-                    <div class="nextTitle">心怀畏惧，砥砺前行</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">下一篇</div>
-                <a href= "/2018/10/07/vue-ts-diy分页组件实现/" title= "vue + ts diy分页组件实现">
-                    <div class="prevTitle">vue + ts diy分页组件实现</div>
+                <a href= "/2018/11/01/学习工作中遇见的异常/" title= "学习工作中遇见的异常">
+                    <div class="prevTitle">学习工作中遇见的异常</div>
                 </a>
             
         </li>
@@ -577,7 +573,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#问题初现"><span class="toc-number">1.</span> <span class="toc-text">问题初现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#锁定问题"><span class="toc-number">2.</span> <span class="toc-text">锁定问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#额外的bug"><span class="toc-number">3.</span> <span class="toc-text">额外的bug</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#最终总结"><span class="toc-number">4.</span> <span class="toc-text">最终总结</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#结论"><span class="toc-number">1.</span> <span class="toc-text">结论</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化顺序"><span class="toc-number">1.1.</span> <span class="toc-text">初始化顺序:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如果有继承关系"><span class="toc-number">1.2.</span> <span class="toc-text">如果有继承关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#main方法怎么执行的呢？"><span class="toc-number">1.3.</span> <span class="toc-text">main方法怎么执行的呢？</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
