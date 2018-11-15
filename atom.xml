@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://shiyuquan.github.io/"/>
-  <updated>2018-11-05T04:39:21.835Z</updated>
+  <updated>2018-11-15T07:30:59.966Z</updated>
   <id>https://shiyuquan.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>springboot long型ID精度丢失问题</title>
+    <link href="https://shiyuquan.github.io/2018/11/15/springboot-long%E5%9E%8BID%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98/"/>
+    <id>https://shiyuquan.github.io/2018/11/15/springboot-long型ID精度丢失问题/</id>
+    <published>2018-11-15T06:49:28.000Z</published>
+    <updated>2018-11-15T07:30:59.966Z</updated>
+    
+    <content type="html"><![CDATA[<p>数据库主键设计为Long，新增查询发现id和数据库不一样，记录了解的信息。<br><a id="more"></a></p><h1 id="问题出现原因"><a href="#问题出现原因" class="headerlink" title="问题出现原因"></a>问题出现原因</h1><p>各语言对long的定义不一样，java的long是2的64次方。而js的number最大为2的54次方-1。所以用json传递的时候就可能会出现数据丢失的问题。</p><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>我采用的解决方法是将数据转json时，将long型转成string，字符串不存在精度的问题。</p><h2 id="全局替换"><a href="#全局替换" class="headerlink" title="全局替换"></a>全局替换</h2><p>在MvcConfig配置json配置<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MvcConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ObjectMapper objectMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">extendMessageConverters</span><span class="params">(List&lt;HttpMessageCoverter&lt;?&gt; converters)</span> </span>&#123;</span><br><span class="line">        MappingJackson2HttpMessageConverter jsonConverter = <span class="keyword">new</span> MappingJackson2HttpMessageConverter();</span><br><span class="line"></span><br><span class="line">        SimpleModule simpleModule = <span class="keyword">new</span> SimpleModule();</span><br><span class="line">        simpleModule.addSerializer(Long.class, ToStringSerializer.instance);</span><br><span class="line">        simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);</span><br><span class="line">        simpleModule.addSerializer(<span class="keyword">long</span>.class, ToStringSerializer.instance);</span><br><span class="line">        objectMapper.registerModule(simpleModule);</span><br><span class="line">        jsonConverter.setObjectMapper(objectMapper);</span><br><span class="line">        converters.add(jsonConverter);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><h2 id="单字段设置"><a href="#单字段设置" class="headerlink" title="单字段设置"></a>单字段设置</h2><p>实体类字段上加如下注解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonSerialize</span>(using=ToStringSerializer.class)</span><br></pre></td></tr></table></figure></p><p><img src="https://source.unsplash.com/random" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;数据库主键设计为Long，新增查询发现id和数据库不一样，记录了解的信息。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="java" scheme="https://shiyuquan.github.io/tags/java/"/>
+    
+      <category term="springboot" scheme="https://shiyuquan.github.io/tags/springboot/"/>
+    
+  </entry>
   
   <entry>
     <title>java类加载顺序</title>
