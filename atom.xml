@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://shiyuquan.github.io/"/>
-  <updated>2018-12-03T08:36:03.150Z</updated>
+  <updated>2018-12-11T07:03:44.828Z</updated>
   <id>https://shiyuquan.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>springboot+pgsql 时间查询遇见的小问题</title>
+    <link href="https://shiyuquan.github.io/2018/12/11/springboot-pgsql-%E6%97%B6%E9%97%B4%E6%9F%A5%E8%AF%A2%E9%81%87%E8%A7%81%E7%9A%84%E5%B0%8F%E9%97%AE%E9%A2%98/"/>
+    <id>https://shiyuquan.github.io/2018/12/11/springboot-pgsql-时间查询遇见的小问题/</id>
+    <published>2018-12-11T06:39:03.000Z</published>
+    <updated>2018-12-11T07:03:44.828Z</updated>
+    
+    <content type="html"><![CDATA[<p>又是一周没写博客，想起来就写一个刚遇见的小问题吧<br><a id="more"></a></p><h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>现在的项目是springboot+pgsql。吐槽一下公司数据库字段的做法先。现在数据库所有的字段都是varchar的。而实体类建的全部对应string，可真是天下大一统啊…</p><h1 id="遇见的问题"><a href="#遇见的问题" class="headerlink" title="遇见的问题"></a>遇见的问题</h1><p>本想将数据库日期改成时间戳格式，但是成本太高了，就错开一步，将实体类的日期字段改成date了，乍一看没什么问题，但是今天发现了个坑。<br>测试接口的时候，手动建的数据，日期格式上就对应不上了，比如空字符串，乱填等等，查出来对应不上date类型。果然一统天下的权势难以撼动啊。</p><h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>将实体类的字段改回了string，然后写了个时间工具类，将date转string。</p><p>一个自己写的坑…</p><p><img src="https://source.unsplash.com/random" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;又是一周没写博客，想起来就写一个刚遇见的小问题吧&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="springboot" scheme="https://shiyuquan.github.io/tags/springboot/"/>
+    
+      <category term="posrtgresql" scheme="https://shiyuquan.github.io/tags/posrtgresql/"/>
+    
+  </entry>
   
   <entry>
     <title>Mybatas Plus 配置实体类公共字段</title>
