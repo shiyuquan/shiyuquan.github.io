@@ -274,7 +274,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">1.4k</span>阅读时长: <span class="post-count reading-time">6 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1.5k</span>阅读时长: <span class="post-count reading-time">7 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -403,7 +403,7 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>工作上前后台分离，有时候接口定义没定好导致开发阶段要修改接口，前台要接口每次都来问，想要及时改好的接口文档。两边都挺麻烦的。wo 项目里面使用了swagger有页面的文档，能不能生成静态文件呢？结果还真的可以，美滋滋<br><a id="more"></a></p>
+        <p>工作上前后台分离，有时候接口定义没定好导致开发阶段要修改接口，前台要接口每次都来问，想要及时改好的接口文档。两边都挺麻烦的。我项目里面使用了swagger有页面的文档，能不能生成静态文件呢？结果还真的可以，美滋滋<br><a id="more"></a></p>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>此处从springboot引用swagger到导出一次讲解，搭建过程可能会遇见很多问题，还请根据实际情况搜索。</p>
 <p>参考</p>
 <p><a href="https://swagger.io/" target="_blank" rel="noopener">swagger官网</a></p>
@@ -422,6 +422,8 @@ height:50vh;
 <p>toFolder(Paths.get(“src/docs/asciidoc/generated”)：指定最终生成文件的具体目录位置<br>输出到单个文件</p>
 <p>如果不想分割结果文件，也可以通过替换toFolder(Paths.get(“src/docs/asciidoc/generated”)为toFile(Paths.get(“src/docs/asciidoc/generated/all”))，将转换结果输出到一个单一的文件中，这样可以最终生成html的也是单一的。</p>
 <h1 id="末尾"><a href="#末尾" class="headerlink" title="末尾"></a>末尾</h1><p>这里只提供了java代码生成文档，还可以通过maven来生成，没试过，有空试试，好像可以直接生成html和pdf，这点很诱人。</p>
+<h1 id="补充html生成"><a href="#补充html生成" class="headerlink" title="补充html生成"></a>补充html生成</h1><p>html是根据生成的.adoc文件生成的，通过maven插件。<br>pom.xml 添加以下内容，放在plugins标签内<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.asciidoctor<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>asciidoctro-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sourceDirectory</span>&gt;</span>docs/asciidoc/gengerated<span class="tag">&lt;/<span class="name">sourceDir</span></span></span><br><span class="line"><span class="tag">        <span class="attr">ectory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">outputDirectory</span>&gt;</span>docs/asciidoc/html<span class="tag">&lt;/<span class="name">outputDirectory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">backend</span>&gt;</span>html<span class="tag">&lt;/<span class="name">backend</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sourceHighlighter</span>&gt;</span>coderay<span class="tag">&lt;/<span class="name">sourceHighLighter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">attributes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">toc</span>&gt;</span>left<span class="tag">&lt;/<span class="name">toc</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">sectnums</span>&gt;</span>true<span class="tag">&lt;/<span class="name">sectnums</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">attributes</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>执行插件就可以生成html到指定的文件夹，idea可以点开maven工具执行<br><img src="/images/swagger.png" alt=""></p>
 <p><img src="https://source.unsplash.com/random" alt=""></p>
 
     </article>
@@ -431,7 +433,7 @@ height:50vh;
             <p>原文作者：<a href="https://shiyuquan.github.io">大腿君的大腿君</a>
             <p>原文链接：<a href="https://shiyuquan.github.io/2018/12/19/springboot-swagger生成文档/">https://shiyuquan.github.io/2018/12/19/springboot-swagger生成文档/</a>
             <p>发表日期：<a href="https://shiyuquan.github.io/2018/12/19/springboot-swagger生成文档/">2018-12-19 15:06:45</a>
-            <p>更新日期：<a href="https://shiyuquan.github.io/2018/12/19/springboot-swagger生成文档/">2018-12-19 16:50:23</a>
+            <p>更新日期：<a href="https://shiyuquan.github.io/2018/12/19/springboot-swagger生成文档/">2018-12-20 13:38:07</a>
             <p>版权声明：来自于<a rel="license" href="">大腿</a>的许可</p>
         </div>
     
@@ -567,7 +569,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#引用pom-xml"><span class="toc-number">2.</span> <span class="toc-text">引用pom.xml</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#编写SwaggerConfig-java"><span class="toc-number">3.</span> <span class="toc-text">编写SwaggerConfig.java</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#controller接口例子"><span class="toc-number">4.</span> <span class="toc-text">controller接口例子</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#生成静态文档"><span class="toc-number">5.</span> <span class="toc-text">生成静态文档</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#末尾"><span class="toc-number">6.</span> <span class="toc-text">末尾</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#引用pom-xml"><span class="toc-number">2.</span> <span class="toc-text">引用pom.xml</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#编写SwaggerConfig-java"><span class="toc-number">3.</span> <span class="toc-text">编写SwaggerConfig.java</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#controller接口例子"><span class="toc-number">4.</span> <span class="toc-text">controller接口例子</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#生成静态文档"><span class="toc-number">5.</span> <span class="toc-text">生成静态文档</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#末尾"><span class="toc-number">6.</span> <span class="toc-text">末尾</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#补充html生成"><span class="toc-number">7.</span> <span class="toc-text">补充html生成</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -580,10 +582,6 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
     
     
     
@@ -839,12 +837,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/22</span><a class="archive-post-title" href= "/2018/10/22/心怀畏惧，砥砺前行/" >心怀畏惧，砥砺前行</a>
+            <span class="archive-post-date">10/22</span><a class="archive-post-title" href= "/2018/10/22/学习路线/" >学习路线</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/22</span><a class="archive-post-title" href= "/2018/10/22/学习路线/" >学习路线</a>
+            <span class="archive-post-date">10/22</span><a class="archive-post-title" href= "/2018/10/22/心怀畏惧，砥砺前行/" >心怀畏惧，砥砺前行</a>
         </li>
     
     
@@ -887,8 +885,6 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
-    
         <span class="sidebar-tag-name" data-tags="java"><span class="iconfont-archer">&#xe606;</span>java</span>
     
         <span class="sidebar-tag-name" data-tags="jvm"><span class="iconfont-archer">&#xe606;</span>jvm</span>
@@ -906,6 +902,8 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="vue"><span class="iconfont-archer">&#xe606;</span>vue</span>
     
         <span class="sidebar-tag-name" data-tags="typescript"><span class="iconfont-archer">&#xe606;</span>typescript</span>
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
     
         <span class="sidebar-tag-name" data-tags="杂谈"><span class="iconfont-archer">&#xe606;</span>杂谈</span>
     
