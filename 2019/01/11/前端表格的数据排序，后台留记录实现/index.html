@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>大腿的博客</title>
+    <title>前端表格的数据排序，后台留记录实现 · 大腿的博客</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >大腿的博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">前端表格的数据排序，后台留记录实现</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>大腿的博客</a>
 </header>
@@ -220,24 +231,74 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(https://source.unsplash.com/random)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            前端表格的数据排序，后台留记录实现
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "功能实现">功能实现</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">746</span>阅读时长: <span class="post-count reading-time">2 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/01/11</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,39 +399,58 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/09/14/markdown-0/" >
-            
-                <span>markdown 语法</span>
-        </a>
-        <div class="abstract-content">
-            <p>第一篇博客，记录博客写法。博客使用<a href="http://www.markdown.cn/" target="_blank" rel="noopener">markdown</a>语法，本文记录其大致语法规范<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/14</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "markdown">markdown</a>
-    
-</div>
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>前端需要自定义排序数据库的数据，在此记录想到的实现方式。<br><a id="more"></a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>排序的页面主要效果有两种，一种是点击按钮，实现上移下移、置顶置底的功能。这类的操作相对简单。二种是直接拖拽表格的数据实现拖拽的排序，个人认为实现上相对难点。考虑的重点在于数据库的效率，按钮式的操作在有排序字段的前提下，可以实现上移下移和置顶置底都只有两条数据的操作，但是按钮的缺乏了自由挑位置插入的功能。手动拖拽的功能可以按自己想法随意排数据，依旧在使用排序字段的方式下，假如现在10条数据可以排，将第九条查到第二条，将会进行8次的数据库操作，并且排序字段越多，数据库操作次数越多。出于效率的考虑，最终选择了建立排序表的方式，替代了排序字段以记录排序的规则。次方法将只操作一次数据库，但相对添加了前后台代码上的效率。</p>
+<h1 id="数据库设置排序字段"><a href="#数据库设置排序字段" class="headerlink" title="数据库设置排序字段"></a>数据库设置排序字段</h1><h2 id="按钮操作"><a href="#按钮操作" class="headerlink" title="按钮操作"></a>按钮操作</h2><p>使用排序字段的方式下，按钮的上移下移置顶置底操作可实现的操作如下</p>
+<blockquote>
+<p>上移下移：这个其实是交换的操作，将需要交换的数据传到后台，后台进行入库。操作数据为两条<br>置顶置底：因为其数据的特殊，可以进行算法来优化。<br>  某数据置顶，则将这个数据与顶数据的排序字段进行减法 sort(顶)-sort(排序)<br>  某数据置底，则将这个数据的模与底数据的排序字段进行加法 |sort(底)|+sort(排序)<br>其操作的数据库也都是两次。</p>
+</blockquote>
+<h2 id="自由拖拽"><a href="#自由拖拽" class="headerlink" title="自由拖拽"></a>自由拖拽</h2><p>自由拖拽的情况下，没想到优化的方法。只能暴力地进行大量的数据操作。</p>
+<h1 id="数据库设置排序表"><a href="#数据库设置排序表" class="headerlink" title="数据库设置排序表"></a>数据库设置排序表</h1><p>在排序表的方式下，我将页面上的排序进行了存储，设置标识字段和排序规则字段，页面将根据标识和规则进行排序。现在的实现为：页面进行本地的排序，然后将排好的顺序根据我们的约定生成相应排序规则，将规则存入数据库。这方法将不对原生的数据库数据进行操作，顺序完全交与排序表，并且每次都只进行一次的数据库交互。对应多出来的操作在每次前端都需要进行数据的遍历，生成排序规则。</p>
+<p>考虑下来，个人认为减轻数据库的负担比较好，所以选用了设置的排序表的方式，并且此方式可作为公共服务供全局使用。</p>
+<p><img src="https://source.unsplash.com/random" alt=""></p>
+
     </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://shiyuquan.github.io">大腿君的大腿君</a>
+            <p>原文链接：<a href="https://shiyuquan.github.io/2019/01/11/前端表格的数据排序，后台留记录实现/">https://shiyuquan.github.io/2019/01/11/前端表格的数据排序，后台留记录实现/</a>
+            <p>发表日期：<a href="https://shiyuquan.github.io/2019/01/11/前端表格的数据排序，后台留记录实现/">2019-01-11 10:09:01</a>
+            <p>更新日期：<a href="https://shiyuquan.github.io/2019/01/11/前端表格的数据排序，后台留记录实现/">2019-01-11 10:54:47</a>
+            <p>版权声明：来自于<a rel="license" href="">大腿</a>的许可</p>
+        </div>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">下一篇</div>
+                <a href= "/2018/12/19/springboot-swagger生成文档/" title= "springboot swagger生成文档">
+                    <div class="prevTitle">springboot swagger生成文档</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -459,6 +539,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库设置排序字段"><span class="toc-number">2.</span> <span class="toc-text">数据库设置排序字段</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#按钮操作"><span class="toc-number">2.1.</span> <span class="toc-text">按钮操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自由拖拽"><span class="toc-number">2.2.</span> <span class="toc-text">自由拖拽</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库设置排序表"><span class="toc-number">3.</span> <span class="toc-text">数据库设置排序表</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -893,6 +991,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>

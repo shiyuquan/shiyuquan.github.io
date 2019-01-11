@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://shiyuquan.github.io/"/>
-  <updated>2018-12-20T05:38:07.166Z</updated>
+  <updated>2019-01-11T02:54:47.936Z</updated>
   <id>https://shiyuquan.github.io/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>前端表格的数据排序，后台留记录实现</title>
+    <link href="https://shiyuquan.github.io/2019/01/11/%E5%89%8D%E7%AB%AF%E8%A1%A8%E6%A0%BC%E7%9A%84%E6%95%B0%E6%8D%AE%E6%8E%92%E5%BA%8F%EF%BC%8C%E5%90%8E%E5%8F%B0%E7%95%99%E8%AE%B0%E5%BD%95%E5%AE%9E%E7%8E%B0/"/>
+    <id>https://shiyuquan.github.io/2019/01/11/前端表格的数据排序，后台留记录实现/</id>
+    <published>2019-01-11T02:09:01.000Z</published>
+    <updated>2019-01-11T02:54:47.936Z</updated>
+    
+    <content type="html"><![CDATA[<p>前端需要自定义排序数据库的数据，在此记录想到的实现方式。<br><a id="more"></a></p><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>排序的页面主要效果有两种，一种是点击按钮，实现上移下移、置顶置底的功能。这类的操作相对简单。二种是直接拖拽表格的数据实现拖拽的排序，个人认为实现上相对难点。考虑的重点在于数据库的效率，按钮式的操作在有排序字段的前提下，可以实现上移下移和置顶置底都只有两条数据的操作，但是按钮的缺乏了自由挑位置插入的功能。手动拖拽的功能可以按自己想法随意排数据，依旧在使用排序字段的方式下，假如现在10条数据可以排，将第九条查到第二条，将会进行8次的数据库操作，并且排序字段越多，数据库操作次数越多。出于效率的考虑，最终选择了建立排序表的方式，替代了排序字段以记录排序的规则。次方法将只操作一次数据库，但相对添加了前后台代码上的效率。</p><h1 id="数据库设置排序字段"><a href="#数据库设置排序字段" class="headerlink" title="数据库设置排序字段"></a>数据库设置排序字段</h1><h2 id="按钮操作"><a href="#按钮操作" class="headerlink" title="按钮操作"></a>按钮操作</h2><p>使用排序字段的方式下，按钮的上移下移置顶置底操作可实现的操作如下</p><blockquote><p>上移下移：这个其实是交换的操作，将需要交换的数据传到后台，后台进行入库。操作数据为两条<br>置顶置底：因为其数据的特殊，可以进行算法来优化。<br>  某数据置顶，则将这个数据与顶数据的排序字段进行减法 sort(顶)-sort(排序)<br>  某数据置底，则将这个数据的模与底数据的排序字段进行加法 |sort(底)|+sort(排序)<br>其操作的数据库也都是两次。</p></blockquote><h2 id="自由拖拽"><a href="#自由拖拽" class="headerlink" title="自由拖拽"></a>自由拖拽</h2><p>自由拖拽的情况下，没想到优化的方法。只能暴力地进行大量的数据操作。</p><h1 id="数据库设置排序表"><a href="#数据库设置排序表" class="headerlink" title="数据库设置排序表"></a>数据库设置排序表</h1><p>在排序表的方式下，我将页面上的排序进行了存储，设置标识字段和排序规则字段，页面将根据标识和规则进行排序。现在的实现为：页面进行本地的排序，然后将排好的顺序根据我们的约定生成相应排序规则，将规则存入数据库。这方法将不对原生的数据库数据进行操作，顺序完全交与排序表，并且每次都只进行一次的数据库交互。对应多出来的操作在每次前端都需要进行数据的遍历，生成排序规则。</p><p>考虑下来，个人认为减轻数据库的负担比较好，所以选用了设置的排序表的方式，并且此方式可作为公共服务供全局使用。</p><p><img src="https://source.unsplash.com/random" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前端需要自定义排序数据库的数据，在此记录想到的实现方式。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="功能实现" scheme="https://shiyuquan.github.io/tags/%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>springboot swagger生成文档</title>
