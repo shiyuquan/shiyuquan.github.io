@@ -1,0 +1,2453 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="大腿君的大腿君">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="大腿君的大腿君">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>java字节指令集 · 大腿的博客</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >大腿的博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">java字节指令集</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>大腿的博客</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(https://source.unsplash.com/random)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            java字节指令集
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">3.9k</span>阅读时长: <span class="post-count reading-time">14 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/01/17</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>java字节指令集<br><a id="more"></a></p>
+<h1 id="常量入栈指令"><a href="#常量入栈指令" class="headerlink" title="常量入栈指令"></a>常量入栈指令</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x01</td>
+<td>aconst_null</td>
+<td></td>
+<td>null值入栈。</td>
+</tr>
+<tr>
+<td>0x02</td>
+<td>iconst_m1</td>
+<td></td>
+<td>-1(int)值入栈。</td>
+</tr>
+<tr>
+<td>0x03</td>
+<td>iconst_0</td>
+<td></td>
+<td>0(int)值入栈。</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>iconst_1</td>
+<td></td>
+<td>1(int)值入栈。</td>
+</tr>
+<tr>
+<td>0x05</td>
+<td>iconst_2</td>
+<td></td>
+<td>2(int)值入栈。</td>
+</tr>
+<tr>
+<td>0x06</td>
+<td>iconst_3</td>
+<td></td>
+<td>3(int)值入栈。</td>
+</tr>
+<tr>
+<td>0x07</td>
+<td>iconst_4</td>
+<td></td>
+<td>4(int)值入栈。</td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>iconst_5</td>
+<td></td>
+<td>5(int)值入栈。</td>
+</tr>
+<tr>
+<td>0x09</td>
+<td>lconst_0</td>
+<td></td>
+<td>0(long)值入栈。</td>
+</tr>
+<tr>
+<td>0x0a</td>
+<td>lconst_1</td>
+<td></td>
+<td>1(long)值入栈。</td>
+</tr>
+<tr>
+<td>0x0b</td>
+<td>fconst_0</td>
+<td></td>
+<td>0(float)值入栈。</td>
+</tr>
+<tr>
+<td>0x0c</td>
+<td>fconst_1</td>
+<td></td>
+<td>1(float)值入栈。</td>
+</tr>
+<tr>
+<td>0x0d</td>
+<td>fconst_2</td>
+<td></td>
+<td>2(float)值入栈。</td>
+</tr>
+<tr>
+<td>0x0e</td>
+<td>dconst_0</td>
+<td></td>
+<td>0(double)值入栈。</td>
+</tr>
+<tr>
+<td>0x0f</td>
+<td>dconst_1</td>
+<td></td>
+<td>1(double)值入栈。</td>
+</tr>
+<tr>
+<td>0x10</td>
+<td>bipush</td>
+<td>valuebyte</td>
+<td>valuebyte值带符号扩展成int值入栈。</td>
+</tr>
+<tr>
+<td>0x11</td>
+<td>sipush</td>
+<td>valuebyte1<br>valuebyte2</td>
+<td>(valuebyte1 &lt;&lt; 8) \</td>
+<td>valuebyte2 值带符号扩展成int值入栈。</td>
+</tr>
+<tr>
+<td>0x12</td>
+<td>ldc</td>
+<td>indexbyte1</td>
+<td>常量池中的常量值（int, float, string reference, object reference）入栈。</td>
+</tr>
+<tr>
+<td>0x13</td>
+<td>ldc_w</td>
+<td>indexbyte1<br>indexbyte2</td>
+<td>常量池中常量（int, float, string   reference, object reference）入栈。</td>
+</tr>
+<tr>
+<td>0x14</td>
+<td>ldc2_w</td>
+<td>indexbyte1<br>indexbyte2</td>
+<td>常量池中常量（long, double）入栈。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="局部变量值转载到栈中指令"><a href="#局部变量值转载到栈中指令" class="headerlink" title="局部变量值转载到栈中指令"></a>局部变量值转载到栈中指令</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x19</td>
+<td>(wide)aload</td>
+<td>indexbyte</td>
+<td>从局部变量indexbyte中装载引用类型值入栈。</td>
+</tr>
+<tr>
+<td>0x2a</td>
+<td>aload_0</td>
+<td></td>
+<td>从局部变量0中装载引用类型值入栈。</td>
+</tr>
+<tr>
+<td>0x2b</td>
+<td>aload_1</td>
+<td></td>
+<td>从局部变量1中装载引用类型值入栈。</td>
+</tr>
+<tr>
+<td>0x2c</td>
+<td>aload_2</td>
+<td></td>
+<td>从局部变量2中装载引用类型值入栈。</td>
+</tr>
+<tr>
+<td>0x2d</td>
+<td>aload_3</td>
+<td></td>
+<td>从局部变量3中装载引用类型值入栈。</td>
+</tr>
+<tr>
+<td>0x15</td>
+<td>(wide)iload</td>
+<td>indexbyte</td>
+<td>从局部变量indexbyte中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td>0x1a</td>
+<td>iload_0</td>
+<td></td>
+<td>从局部变量0中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td>0x1b</td>
+<td>iload_1</td>
+<td></td>
+<td>从局部变量1中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td>0x1c</td>
+<td>iload_2</td>
+<td></td>
+<td>从局部变量2中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td>0x1d</td>
+<td>iload_3</td>
+<td></td>
+<td>从局部变量3中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td>0x16</td>
+<td>(wide)lload</td>
+<td>indexbyte</td>
+<td>从局部变量indexbyte中装载long类型值入栈。</td>
+</tr>
+<tr>
+<td>0x1e</td>
+<td>lload_0</td>
+<td></td>
+<td>从局部变量0中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td>0x1f</td>
+<td>lload_1</td>
+<td></td>
+<td>从局部变量1中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td>0x20</td>
+<td>lload_2</td>
+<td></td>
+<td>从局部变量2中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td>0x21</td>
+<td>lload_3</td>
+<td></td>
+<td>从局部变量3中装载int类型值入栈。</td>
+</tr>
+<tr>
+<td>0x17</td>
+<td>(wide)fload</td>
+<td>indexbyte</td>
+<td>从局部变量indexbyte中装载float类型值入栈。</td>
+</tr>
+<tr>
+<td>0x22</td>
+<td>fload_0</td>
+<td></td>
+<td>从局部变量0中装载float类型值入栈。</td>
+</tr>
+<tr>
+<td>0x23</td>
+<td>fload_1</td>
+<td></td>
+<td>从局部变量1中装载float类型值入栈。</td>
+</tr>
+<tr>
+<td>0x24</td>
+<td>fload_2</td>
+<td></td>
+<td>从局部变量2中装载float类型值入栈。</td>
+</tr>
+<tr>
+<td>0x25</td>
+<td>fload_3</td>
+<td></td>
+<td>从局部变量3中装载float类型值入栈。</td>
+</tr>
+<tr>
+<td>0x18</td>
+<td>(wide)dload</td>
+<td>indexbyte</td>
+<td>从局部变量indexbyte中装载double类型值入栈。</td>
+</tr>
+<tr>
+<td>0x26</td>
+<td>dload_0</td>
+<td></td>
+<td>从局部变量0中装载double类型值入栈。</td>
+</tr>
+<tr>
+<td>0x27</td>
+<td>dload_1</td>
+<td></td>
+<td>从局部变量1中装载double类型值入栈。</td>
+</tr>
+<tr>
+<td>0x28</td>
+<td>dload_2</td>
+<td></td>
+<td>从局部变量2中装载double类型值入栈。</td>
+</tr>
+<tr>
+<td>0x29</td>
+<td>dload_3</td>
+<td></td>
+<td>从局部变量3中装载double类型值入栈。</td>
+</tr>
+<tr>
+<td>0x32</td>
+<td>aaload</td>
+<td></td>
+<td>从引用类型数组中装载指定项的值。</td>
+</tr>
+<tr>
+<td>0x2e</td>
+<td>iaload</td>
+<td></td>
+<td>从int类型数组中装载指定项的值。</td>
+</tr>
+<tr>
+<td>0x2f</td>
+<td>laload</td>
+<td></td>
+<td>从long类型数组中装载指定项的值。</td>
+</tr>
+<tr>
+<td>0x30</td>
+<td>faload</td>
+<td></td>
+<td>从float类型数组中装载指定项的值。</td>
+</tr>
+<tr>
+<td>0x31</td>
+<td>daload</td>
+<td></td>
+<td>从double类型数组中装载指定项的值。</td>
+</tr>
+<tr>
+<td>0x33</td>
+<td>baload</td>
+<td></td>
+<td>从boolean类型数组或byte类型数组中装载指定项的值（先转换为int类型值，后压栈）。</td>
+</tr>
+<tr>
+<td>0x34</td>
+<td>caload</td>
+<td></td>
+<td>从char类型数组中装载指定项的值（先转换为int类型值，后压栈）。</td>
+</tr>
+<tr>
+<td>0x35</td>
+<td>saload</td>
+<td></td>
+<td>从short类型数组中装载指定项的值（先转换为int类型值，后压栈）。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="将栈顶值保存到局部变量中指令"><a href="#将栈顶值保存到局部变量中指令" class="headerlink" title="将栈顶值保存到局部变量中指令"></a>将栈顶值保存到局部变量中指令</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x3a</td>
+<td>(wide)astore</td>
+<td>indexbyte</td>
+<td>将栈顶引用类型值保存到局部变量indexbyte中。</td>
+</tr>
+<tr>
+<td>0x4b</td>
+<td>astroe_0</td>
+<td></td>
+<td>将栈顶引用类型值保存到局部变量0中。</td>
+</tr>
+<tr>
+<td>0x4c</td>
+<td>astore_1</td>
+<td></td>
+<td>将栈顶引用类型值保存到局部变量1中。</td>
+</tr>
+<tr>
+<td>0x4d</td>
+<td>astore_2</td>
+<td></td>
+<td>将栈顶引用类型值保存到局部变量2中。</td>
+</tr>
+<tr>
+<td>0x4e</td>
+<td>astore_3</td>
+<td></td>
+<td>将栈顶引用类型值保存到局部变量3中。</td>
+</tr>
+<tr>
+<td>0x36</td>
+<td>(wide)istore</td>
+<td>indexbyte</td>
+<td>将栈顶int类型值保存到局部变量indexbyte中。</td>
+</tr>
+<tr>
+<td>0x3b</td>
+<td>istore_0</td>
+<td></td>
+<td>将栈顶int类型值保存到局部变量0中。</td>
+</tr>
+<tr>
+<td>0x3c</td>
+<td>istore_1</td>
+<td></td>
+<td>将栈顶int类型值保存到局部变量1中。</td>
+</tr>
+<tr>
+<td>0x3d</td>
+<td>istore_2</td>
+<td></td>
+<td>将栈顶int类型值保存到局部变量2中。</td>
+</tr>
+<tr>
+<td>0x3e</td>
+<td>istore_3</td>
+<td></td>
+<td>将栈顶int类型值保存到局部变量3中。</td>
+</tr>
+<tr>
+<td>0x37</td>
+<td>(wide)lstore</td>
+<td>indexbyte</td>
+<td>将栈顶long类型值保存到局部变量indexbyte中。</td>
+</tr>
+<tr>
+<td>0x3f</td>
+<td>lstore_0</td>
+<td></td>
+<td>将栈顶long类型值保存到局部变量0中。</td>
+</tr>
+<tr>
+<td>0x40</td>
+<td>lstore_1</td>
+<td></td>
+<td>将栈顶long类型值保存到局部变量1中。</td>
+</tr>
+<tr>
+<td>0x41</td>
+<td>lstore_2</td>
+<td></td>
+<td>将栈顶long类型值保存到局部变量2中。</td>
+</tr>
+<tr>
+<td>0x42</td>
+<td>lstroe_3</td>
+<td></td>
+<td>将栈顶long类型值保存到局部变量3中。</td>
+</tr>
+<tr>
+<td>0x38</td>
+<td>(wide)fstore</td>
+<td>indexbyte</td>
+<td>将栈顶float类型值保存到局部变量indexbyte中。</td>
+</tr>
+<tr>
+<td>0x43</td>
+<td>fstore_0</td>
+<td></td>
+<td>将栈顶float类型值保存到局部变量0中。</td>
+</tr>
+<tr>
+<td>0x44</td>
+<td>fstore_1</td>
+<td></td>
+<td>将栈顶float类型值保存到局部变量1中。</td>
+</tr>
+<tr>
+<td>0x45</td>
+<td>fstore_2</td>
+<td></td>
+<td>将栈顶float类型值保存到局部变量2中。</td>
+</tr>
+<tr>
+<td>0x46</td>
+<td>fstore_3</td>
+<td></td>
+<td>将栈顶float类型值保存到局部变量3中。</td>
+</tr>
+<tr>
+<td>0x39</td>
+<td>(wide)dstore</td>
+<td>indexbyte</td>
+<td>将栈顶double类型值保存到局部变量indexbyte中。</td>
+</tr>
+<tr>
+<td>0x47</td>
+<td>dstore_0</td>
+<td></td>
+<td>将栈顶double类型值保存到局部变量0中。</td>
+</tr>
+<tr>
+<td>0x48</td>
+<td>dstore_1</td>
+<td></td>
+<td>将栈顶double类型值保存到局部变量1中。</td>
+</tr>
+<tr>
+<td>0x49</td>
+<td>dstore_2</td>
+<td></td>
+<td>将栈顶double类型值保存到局部变量2中。</td>
+</tr>
+<tr>
+<td>0x4a</td>
+<td>dstore_3</td>
+<td></td>
+<td>将栈顶double类型值保存到局部变量3中。</td>
+</tr>
+<tr>
+<td>0x53</td>
+<td>aastore</td>
+<td></td>
+<td>将栈顶引用类型值保存到指定引用类型数组的指定项。</td>
+</tr>
+<tr>
+<td>0x4f</td>
+<td>iastore</td>
+<td></td>
+<td>将栈顶int类型值保存到指定int类型数组的指定项。</td>
+</tr>
+<tr>
+<td>0x50</td>
+<td>lastore</td>
+<td></td>
+<td>将栈顶long类型值保存到指定long类型数组的指定项。</td>
+</tr>
+<tr>
+<td>0x51</td>
+<td>fastore</td>
+<td></td>
+<td>将栈顶float类型值保存到指定float类型数组的指定项。</td>
+</tr>
+<tr>
+<td>0x52</td>
+<td>dastore</td>
+<td></td>
+<td>将栈顶double类型值保存到指定double类型数组的指定项。</td>
+</tr>
+<tr>
+<td>0x54</td>
+<td>bastroe</td>
+<td></td>
+<td>将栈顶boolean类型值或byte类型值保存到指定boolean类型数组或byte类型数组的指定项。</td>
+</tr>
+<tr>
+<td>0x55</td>
+<td>castore</td>
+<td></td>
+<td>将栈顶char类型值保存到指定char类型数组的指定项。</td>
+</tr>
+<tr>
+<td>0x56</td>
+<td>sastore</td>
+<td></td>
+<td>将栈顶short类型值保存到指定short类型数组的指定项。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="wide指令"><a href="#wide指令" class="headerlink" title="wide指令"></a>wide指令</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0xc4</td>
+<td>wide</td>
+<td></td>
+<td>使用附加字节扩展局部变量索引（iinc指令特殊）。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="通用（无类型）栈操作指令"><a href="#通用（无类型）栈操作指令" class="headerlink" title="通用（无类型）栈操作指令"></a>通用（无类型）栈操作指令</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>nop</td>
+<td></td>
+<td>空操作。</td>
+</tr>
+<tr>
+<td>0x57</td>
+<td>pop</td>
+<td></td>
+<td>从栈顶弹出一个字长的数据。</td>
+</tr>
+<tr>
+<td>0x58</td>
+<td>pop2</td>
+<td></td>
+<td>从栈顶弹出两个字长的数据。</td>
+</tr>
+<tr>
+<td>0x59</td>
+<td>dup</td>
+<td></td>
+<td>复制栈顶一个字长的数据，将复制后的数据压栈。</td>
+</tr>
+<tr>
+<td>0x5a</td>
+<td>dup_x1</td>
+<td></td>
+<td>复制栈顶一个字长的数据，弹出栈顶两个字长数据，先将复制后的数据压栈，再将弹出的两个字长数据压栈。</td>
+</tr>
+<tr>
+<td>0x5b</td>
+<td>dup_x2</td>
+<td></td>
+<td>复制栈顶一个字长的数据，弹出栈顶三个字长的数据，将复制后的数据压栈，再将弹出的三个字长的数据压栈。</td>
+</tr>
+<tr>
+<td>0x5c</td>
+<td>dup2</td>
+<td></td>
+<td>复制栈顶两个字长的数据，将复制后的两个字长的数据压栈。</td>
+</tr>
+<tr>
+<td>0x5d</td>
+<td>dup2_x1</td>
+<td></td>
+<td>复制栈顶两个字长的数据，弹出栈顶三个字长的数据，将复制后的两个字长的数据压栈，再将弹出的三个字长的数据压栈。</td>
+</tr>
+<tr>
+<td>0x5e</td>
+<td>dup2_x2</td>
+<td></td>
+<td>复制栈顶两个字长的数据，弹出栈顶四个字长的数据，将复制后的两个字长的数据压栈，再将弹出的四个字长的数据压栈。</td>
+</tr>
+<tr>
+<td>0x5f</td>
+<td>swap</td>
+<td></td>
+<td><a href="http://lib.csdn.net/base/javaee" target="_blank" rel="noopener">交换栈顶两个字长的数据的位置。Java指令中没有提供以两个字长为单位的交换指令。</a></td>
+</tr>
+</tbody>
+</table>
+<h1 id="类型转换指令"><a href="#类型转换指令" class="headerlink" title="类型转换指令"></a>类型转换指令</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x86</td>
+<td>i2f</td>
+<td></td>
+<td>将栈顶int类型值转换为float类型值。</td>
+</tr>
+<tr>
+<td>0x85</td>
+<td>i2l</td>
+<td></td>
+<td>将栈顶int类型值转换为long类型值。</td>
+</tr>
+<tr>
+<td>0x87</td>
+<td>i2d</td>
+<td></td>
+<td>将栈顶int类型值转换为double类型值。</td>
+</tr>
+<tr>
+<td>0x8b</td>
+<td>f2i</td>
+<td></td>
+<td>将栈顶float类型值转换为int类型值。</td>
+</tr>
+<tr>
+<td>0x8c</td>
+<td>f2l</td>
+<td></td>
+<td>将栈顶float类型值转换为long类型值。</td>
+</tr>
+<tr>
+<td>0x8d</td>
+<td>f2d</td>
+<td></td>
+<td>将栈顶float类型值转换为double类型值。</td>
+</tr>
+<tr>
+<td>0x88</td>
+<td>l2i</td>
+<td></td>
+<td>将栈顶long类型值转换为int类型值。</td>
+</tr>
+<tr>
+<td>0x89</td>
+<td>l2f</td>
+<td></td>
+<td>将栈顶long类型值转换为float类型值。</td>
+</tr>
+<tr>
+<td>0x8a</td>
+<td>l2d</td>
+<td></td>
+<td>将栈顶long类型值转换double类型值。</td>
+</tr>
+<tr>
+<td>0x8e</td>
+<td>d2i</td>
+<td></td>
+<td>将栈顶double类型值转换为int类型值。</td>
+</tr>
+<tr>
+<td>0x90</td>
+<td>d2f</td>
+<td></td>
+<td>将栈顶double类型值转换为float类型值。</td>
+</tr>
+<tr>
+<td>0x8f</td>
+<td>d2l</td>
+<td></td>
+<td>将栈顶double类型值转换为long类型值。</td>
+</tr>
+<tr>
+<td>0x91</td>
+<td>i2b</td>
+<td></td>
+<td>将栈顶int类型值截断成byte类型，后带符号扩展成int类型值入栈。</td>
+</tr>
+<tr>
+<td>0x92</td>
+<td>i2c</td>
+<td></td>
+<td>将栈顶int类型值截断成char类型值，后带符号扩展成int类型值入栈。</td>
+</tr>
+<tr>
+<td>0x93</td>
+<td>i2s</td>
+<td></td>
+<td>将栈顶int类型值截断成short类型值，后带符号扩展成int类型值入栈。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="整数运算"><a href="#整数运算" class="headerlink" title="整数运算"></a>整数运算</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x60</td>
+<td>iadd</td>
+<td></td>
+<td>将栈顶两int类型数相加，结果入栈。</td>
+</tr>
+<tr>
+<td>0x64</td>
+<td>isub</td>
+<td></td>
+<td>将栈顶两int类型数相减，结果入栈。</td>
+</tr>
+<tr>
+<td>0x68</td>
+<td>imul</td>
+<td></td>
+<td>将栈顶两int类型数相乘，结果入栈。</td>
+</tr>
+<tr>
+<td>0x6c</td>
+<td>idiv</td>
+<td></td>
+<td>将栈顶两int类型数相除，结果入栈。</td>
+</tr>
+<tr>
+<td>0x70</td>
+<td>irem</td>
+<td></td>
+<td>将栈顶两int类型数取模，结果入栈。</td>
+</tr>
+<tr>
+<td>0x74</td>
+<td>ineg</td>
+<td></td>
+<td>将栈顶int类型值取负，结果入栈。</td>
+</tr>
+<tr>
+<td>0x61</td>
+<td>ladd</td>
+<td></td>
+<td>将栈顶两long类型数相加，结果入栈。</td>
+</tr>
+<tr>
+<td>0x65</td>
+<td>lsub</td>
+<td></td>
+<td>将栈顶两long类型数相减，结果入栈。</td>
+</tr>
+<tr>
+<td>0x69</td>
+<td>lmul</td>
+<td></td>
+<td>将栈顶两long类型数相乘，结果入栈。</td>
+</tr>
+<tr>
+<td>0x6d</td>
+<td>ldiv</td>
+<td></td>
+<td>将栈顶两long类型数相除，结果入栈。</td>
+</tr>
+<tr>
+<td>0x71</td>
+<td>lrem</td>
+<td></td>
+<td>将栈顶两long类型数取模，结果入栈。</td>
+</tr>
+<tr>
+<td>0x75</td>
+<td>lneg</td>
+<td></td>
+<td>将栈顶long类型值取负，结果入栈。</td>
+</tr>
+<tr>
+<td>0x84</td>
+<td>(wide)iinc</td>
+<td>indexbyte<br>constbyte</td>
+<td>将整数值constbyte加到indexbyte指定的int类型的局部变量中。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="浮点运算"><a href="#浮点运算" class="headerlink" title="浮点运算"></a>浮点运算</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x62</td>
+<td>fadd</td>
+<td></td>
+<td>将栈顶两float类型数相加，结果入栈。</td>
+</tr>
+<tr>
+<td>0x66</td>
+<td>fsub</td>
+<td></td>
+<td>将栈顶两float类型数相减，结果入栈。</td>
+</tr>
+<tr>
+<td>0x6a</td>
+<td>fmul</td>
+<td></td>
+<td>将栈顶两float类型数相乘，结果入栈。</td>
+</tr>
+<tr>
+<td>0x6e</td>
+<td>fdiv</td>
+<td></td>
+<td>将栈顶两float类型数相除，结果入栈。</td>
+</tr>
+<tr>
+<td>0x72</td>
+<td>frem</td>
+<td></td>
+<td>将栈顶两float类型数取模，结果入栈。</td>
+</tr>
+<tr>
+<td>0x76</td>
+<td>fneg</td>
+<td></td>
+<td>将栈顶float类型值取反，结果入栈。</td>
+</tr>
+<tr>
+<td>0x63</td>
+<td>dadd</td>
+<td></td>
+<td>将栈顶两double类型数相加，结果入栈。</td>
+</tr>
+<tr>
+<td>0x67</td>
+<td>dsub</td>
+<td></td>
+<td>将栈顶两double类型数相减，结果入栈。</td>
+</tr>
+<tr>
+<td>0x6b</td>
+<td>dmul</td>
+<td></td>
+<td>将栈顶两double类型数相乘，结果入栈。</td>
+</tr>
+<tr>
+<td>0x6f</td>
+<td>ddiv</td>
+<td></td>
+<td>将栈顶两double类型数相除，结果入栈。</td>
+</tr>
+<tr>
+<td>0x73</td>
+<td>drem</td>
+<td></td>
+<td>将栈顶两double类型数取模，结果入栈。</td>
+</tr>
+<tr>
+<td>0x77</td>
+<td>dneg</td>
+<td></td>
+<td>将栈顶double类型值取负，结果入栈。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="逻辑运算——移位运算"><a href="#逻辑运算——移位运算" class="headerlink" title="逻辑运算——移位运算"></a>逻辑运算——移位运算</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x78</td>
+<td>ishl</td>
+<td></td>
+<td>左移int类型值。</td>
+</tr>
+<tr>
+<td>0x79</td>
+<td>lshl</td>
+<td></td>
+<td>左移long类型值。</td>
+</tr>
+<tr>
+<td>0x7a</td>
+<td>ishr</td>
+<td></td>
+<td>算术右移int类型值。</td>
+</tr>
+<tr>
+<td>0x7b</td>
+<td>lshr</td>
+<td></td>
+<td>算术右移long类型值。</td>
+</tr>
+<tr>
+<td>0x7c</td>
+<td>iushr</td>
+<td></td>
+<td>逻辑右移int类型值。</td>
+</tr>
+<tr>
+<td>0x7d</td>
+<td>lushr</td>
+<td></td>
+<td>逻辑右移long类型值。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="逻辑运算——按位布尔运算"><a href="#逻辑运算——按位布尔运算" class="headerlink" title="逻辑运算——按位布尔运算"></a>逻辑运算——按位布尔运算</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x73</td>
+<td>iand</td>
+<td></td>
+<td>对int类型按位与运算。</td>
+</tr>
+<tr>
+<td>0x7f</td>
+<td>land</td>
+<td></td>
+<td>对long类型的按位与运算。</td>
+</tr>
+<tr>
+<td>0x80</td>
+<td>ior</td>
+<td></td>
+<td>对int类型的按位或运算。</td>
+</tr>
+<tr>
+<td>0x81</td>
+<td>lor</td>
+<td></td>
+<td>对long类型的按位或运算。</td>
+</tr>
+<tr>
+<td>0x82</td>
+<td>ixor</td>
+<td></td>
+<td>对int类型的按位异或运算。</td>
+</tr>
+<tr>
+<td>0x83</td>
+<td>lxor</td>
+<td></td>
+<td>对long类型的按位异或运算。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="控制流指令——条件跳转指令"><a href="#控制流指令——条件跳转指令" class="headerlink" title="控制流指令——条件跳转指令"></a>控制流指令——条件跳转指令</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x99</td>
+<td>ifeq</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>若栈顶int类型值为0则跳转。</td>
+</tr>
+<tr>
+<td>0x9a</td>
+<td>ifne</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>若栈顶int类型值不为0则跳转。</td>
+</tr>
+<tr>
+<td>0x9b</td>
+<td>iflt</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>若栈顶int类型值小于0则跳转。</td>
+</tr>
+<tr>
+<td>0x9e</td>
+<td>ifle</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>若栈顶int类型值小于等于0则跳转。</td>
+</tr>
+<tr>
+<td>0x9d</td>
+<td>ifgt</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>若栈顶int类型值大于0则跳转。</td>
+</tr>
+<tr>
+<td>0x9c</td>
+<td>ifge</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>若栈顶int类型值大于等于0则跳转。</td>
+</tr>
+<tr>
+<td>0x9f</td>
+<td>if_icmpeq</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>若栈顶两int类型值相等则跳转。</td>
+</tr>
+<tr>
+<td>0xa0</td>
+<td>if_icmpne</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>若栈顶两int类型值不相等则跳转。</td>
+</tr>
+<tr>
+<td>0xa1</td>
+<td>if_icmplt</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>若栈顶两int类型值前小于后则跳转。</td>
+</tr>
+<tr>
+<td>0xa4</td>
+<td>if_icmple</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>若栈顶两int类型值前小于等于后则跳转。</td>
+</tr>
+<tr>
+<td>0xa3</td>
+<td>if_icmpgt</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>若栈顶两int类型值前大于后则跳转。</td>
+</tr>
+<tr>
+<td>0xa2</td>
+<td>if_icmpge</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>若栈顶两int类型值前大于等于后则跳转。</td>
+</tr>
+<tr>
+<td>0xc6</td>
+<td>ifnull</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>若栈顶引用值为null则跳转。</td>
+</tr>
+<tr>
+<td>0xc7</td>
+<td>ifnonnull</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>若栈顶引用值不为null则跳转。</td>
+</tr>
+<tr>
+<td>0xa5</td>
+<td>if_acmpeq</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>若栈顶两引用类型值相等则跳转。</td>
+</tr>
+<tr>
+<td>0xa6</td>
+<td>if_acmpne</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>若栈顶两引用类型值不相等则跳转。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="控制流指令——比较指令"><a href="#控制流指令——比较指令" class="headerlink" title="控制流指令——比较指令"></a>控制流指令——比较指令</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x94</td>
+<td>lcmp</td>
+<td></td>
+<td>比较栈顶两long类型值，前者大，1入栈；相等，0入栈；后者大，-1入栈。</td>
+</tr>
+<tr>
+<td>0x95</td>
+<td>fcmpl</td>
+<td></td>
+<td>比较栈顶两float类型值，前者大，1入栈；相等，0入栈；后者大，-1入栈；有NaN存在，-1入栈。</td>
+</tr>
+<tr>
+<td>0x96</td>
+<td>fcmpg</td>
+<td></td>
+<td>比较栈顶两float类型值，前者大，1入栈；相等，0入栈；后者大，-1入栈；有NaN存在，-1入栈。</td>
+</tr>
+<tr>
+<td>0x97</td>
+<td>dcmpl</td>
+<td></td>
+<td>比较栈顶两double类型值，前者大，1入栈；相等，0入栈；后者大，-1入栈；有NaN存在，-1入栈。</td>
+</tr>
+<tr>
+<td>0x98</td>
+<td>dcmpg</td>
+<td></td>
+<td>比较栈顶两double类型值，前者大，1入栈；相等，0入栈；后者大，-1入栈；有NaN存在，-1入栈。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="控制流指令——无条件跳转指令"><a href="#控制流指令——无条件跳转指令" class="headerlink" title="控制流指令——无条件跳转指令"></a>控制流指令——无条件跳转指令</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0xa7</td>
+<td>goto</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>无条件跳转到指定位置。</td>
+</tr>
+<tr>
+<td>0xc8</td>
+<td>goto_w</td>
+<td>branchbyte1<br>branchbyte2<br>branchbyte3<br>branchbyte4</td>
+<td>无条件跳转到指定位置（宽索引）。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="控制流指令——表跳转指令"><a href="#控制流指令——表跳转指令" class="headerlink" title="控制流指令——表跳转指令"></a>控制流指令——表跳转指令</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0xaa</td>
+<td>tableswitch</td>
+<td><0-3bytepad><br>defaultbyte1<br>defaultbyte2<br>defaultbyte3<br>defaultbyte4<br>lowbyte1<br>lowbyte2<br>lowbyte3<br>lowbyte4<br>highbyte1<br>highbyte2<br>highbyte3<br>highbyte4<br>jump   offsets…</0-3bytepad></td>
+<td>通过索引访问跳转表，并跳转。</td>
+</tr>
+<tr>
+<td>0xab</td>
+<td>lookupswitch</td>
+<td><0-3bytepad><br>defaultbyte1<br>defaultbyte2<br>defaultbyte3<br>defaultbyte4<br>npairs1<br>npairs2<br>npairs3<br>npairs4<br>match   offsets</0-3bytepad></td>
+<td>通过键值访问跳转表，并跳转。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="控制流指令——异常和finally"><a href="#控制流指令——异常和finally" class="headerlink" title="控制流指令——异常和finally"></a>控制流指令——异常和finally</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0xbf</td>
+<td>athrow</td>
+<td></td>
+<td>抛出异常。</td>
+</tr>
+<tr>
+<td>0xa8</td>
+<td>jsr</td>
+<td>branchbyte1<br>branchbyte2</td>
+<td>跳转到子例程序。</td>
+</tr>
+<tr>
+<td>0xc9</td>
+<td>jsr_w</td>
+<td>branchbyte1<br>branchbyte2<br>branchbyte3<br>branchbyte4</td>
+<td>跳转到子例程序（宽索引）。</td>
+</tr>
+<tr>
+<td>0xa9</td>
+<td>(wide)ret</td>
+<td>indexbyte</td>
+<td>返回子例程序。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="对象操作指令"><a href="#对象操作指令" class="headerlink" title="对象操作指令"></a>对象操作指令</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0xbb</td>
+<td>new</td>
+<td>indexbyte1<br>indexbyte2</td>
+<td>创建新的对象实例。</td>
+</tr>
+<tr>
+<td>0xc0</td>
+<td>checkcast</td>
+<td>indexbyte1<br>indexbyte2</td>
+<td>类型强转。</td>
+</tr>
+<tr>
+<td>0xc1</td>
+<td>instanceof</td>
+<td>indexbyte1<br>indexbyte2</td>
+<td>判断类型。</td>
+</tr>
+<tr>
+<td>0xb4</td>
+<td>getfield</td>
+<td>indexbyte1<br>indexbyte2</td>
+<td>获取对象字段的值。</td>
+</tr>
+<tr>
+<td>0xb5</td>
+<td>putfield</td>
+<td>indexbyte1<br>indexbyte2</td>
+<td>给对象字段赋值。</td>
+</tr>
+<tr>
+<td>0xb2</td>
+<td>getstatic</td>
+<td>indexbyte1<br>indexbyte2</td>
+<td>获取静态字段的值。</td>
+</tr>
+<tr>
+<td>0xb3</td>
+<td>putstatic</td>
+<td>indexbyte1<br>indexbyte2</td>
+<td>给静态字段赋值。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="数组操作指令"><a href="#数组操作指令" class="headerlink" title="数组操作指令"></a>数组操作指令</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0xbc</td>
+<td>newarray</td>
+<td>atype</td>
+<td>创建type类型的数组。</td>
+</tr>
+<tr>
+<td>0xbd</td>
+<td>anewarray</td>
+<td>indexbyte1<br>indexbyte2</td>
+<td>创建引用类型的数组。</td>
+</tr>
+<tr>
+<td>0xbe</td>
+<td>arraylength</td>
+<td></td>
+<td>获取一维数组的长度。</td>
+</tr>
+<tr>
+<td>0xc5</td>
+<td>multianewarray</td>
+<td>indexbyte1<br>indexbyte2<br>dimension</td>
+<td>创建dimension维度的数组。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="方法调用指令"><a href="#方法调用指令" class="headerlink" title="方法调用指令"></a>方法调用指令</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0xb7</td>
+<td>invokespecial</td>
+<td>indexbyte1<br>indexbyte2</td>
+<td>编译时方法绑定调用方法。</td>
+</tr>
+<tr>
+<td>0xb6</td>
+<td>invokevirtual</td>
+<td>indexbyte1<br>indexbyte2</td>
+<td>运行时方法绑定调用方法。</td>
+</tr>
+<tr>
+<td>0xb8</td>
+<td>invokestatic</td>
+<td>indexbyte1<br>indexbyte2</td>
+<td>调用静态方法。</td>
+</tr>
+<tr>
+<td>0xb9</td>
+<td>invokeinterface</td>
+<td>indexbyte1<br>indexbyte2<br>count<br>0</td>
+<td>调用接口方法。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="方法返回指令"><a href="#方法返回指令" class="headerlink" title="方法返回指令"></a>方法返回指令</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0xac</td>
+<td>ireturn</td>
+<td></td>
+<td>返回int类型值。</td>
+</tr>
+<tr>
+<td>0xad</td>
+<td>lreturn</td>
+<td></td>
+<td>返回long类型值。</td>
+</tr>
+<tr>
+<td>0xae</td>
+<td>freturn</td>
+<td></td>
+<td>返回float类型值。</td>
+</tr>
+<tr>
+<td>0xaf</td>
+<td>dreturn</td>
+<td></td>
+<td>返回double类型值。</td>
+</tr>
+<tr>
+<td>0xb0</td>
+<td>areturn</td>
+<td></td>
+<td>返回引用类型值。</td>
+</tr>
+<tr>
+<td>0xb1</td>
+<td>return</td>
+<td></td>
+<td>void函数返回。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="线程同步指令"><a href="#线程同步指令" class="headerlink" title="线程同步指令"></a>线程同步指令</h1><table>
+<thead>
+<tr>
+<th>指令码</th>
+<th>操作码（助记符）</th>
+<th>操作数</th>
+<th>描述（栈指操作数栈）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0xc2</td>
+<td>monitorenter</td>
+<td></td>
+<td>进入并获得对象监视器。</td>
+</tr>
+<tr>
+<td>0xc3</td>
+<td>monitorexit</td>
+<td></td>
+<td>释放并退出对象监视器。</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://source.unsplash.com/random" alt=""></p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://shiyuquan.github.io">大腿君的大腿君</a>
+            <p>原文链接：<a href="https://shiyuquan.github.io/2019/01/17/java字节指令集/">https://shiyuquan.github.io/2019/01/17/java字节指令集/</a>
+            <p>发表日期：<a href="https://shiyuquan.github.io/2019/01/17/java字节指令集/">2019-01-17 11:02:03</a>
+            <p>更新日期：<a href="https://shiyuquan.github.io/2019/01/17/java字节指令集/">2019-01-17 14:34:18</a>
+            <p>版权声明：来自于<a rel="license" href="">大腿</a>的许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">下一篇</div>
+                <a href= "/2019/01/11/前端表格的数据排序，后台留记录实现/" title= "前端表格的数据排序，后台留记录实现">
+                    <div class="prevTitle">前端表格的数据排序，后台留记录实现</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:550765252@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/shiyuquan" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/wechat.jpg" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <!-- <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div> -->
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常量入栈指令"><span class="toc-number">1.</span> <span class="toc-text">常量入栈指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#局部变量值转载到栈中指令"><span class="toc-number">2.</span> <span class="toc-text">局部变量值转载到栈中指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#将栈顶值保存到局部变量中指令"><span class="toc-number">3.</span> <span class="toc-text">将栈顶值保存到局部变量中指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#wide指令"><span class="toc-number">4.</span> <span class="toc-text">wide指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#通用（无类型）栈操作指令"><span class="toc-number">5.</span> <span class="toc-text">通用（无类型）栈操作指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#类型转换指令"><span class="toc-number">6.</span> <span class="toc-text">类型转换指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#整数运算"><span class="toc-number">7.</span> <span class="toc-text">整数运算</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浮点运算"><span class="toc-number">8.</span> <span class="toc-text">浮点运算</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#逻辑运算——移位运算"><span class="toc-number">9.</span> <span class="toc-text">逻辑运算——移位运算</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#逻辑运算——按位布尔运算"><span class="toc-number">10.</span> <span class="toc-text">逻辑运算——按位布尔运算</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#控制流指令——条件跳转指令"><span class="toc-number">11.</span> <span class="toc-text">控制流指令——条件跳转指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#控制流指令——比较指令"><span class="toc-number">12.</span> <span class="toc-text">控制流指令——比较指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#控制流指令——无条件跳转指令"><span class="toc-number">13.</span> <span class="toc-text">控制流指令——无条件跳转指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#控制流指令——表跳转指令"><span class="toc-number">14.</span> <span class="toc-text">控制流指令——表跳转指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#控制流指令——异常和finally"><span class="toc-number">15.</span> <span class="toc-text">控制流指令——异常和finally</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对象操作指令"><span class="toc-number">16.</span> <span class="toc-text">对象操作指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数组操作指令"><span class="toc-number">17.</span> <span class="toc-text">数组操作指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法调用指令"><span class="toc-number">18.</span> <span class="toc-text">方法调用指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法返回指令"><span class="toc-number">19.</span> <span class="toc-text">方法返回指令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#线程同步指令"><span class="toc-number">20.</span> <span class="toc-text">线程同步指令</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">历史</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">标签</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">类别</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 19
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/17</span><a class="archive-post-title" href= "/2019/01/17/java字节指令集/" >java字节指令集</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/11</span><a class="archive-post-title" href= "/2019/01/11/前端表格的数据排序，后台留记录实现/" >前端表格的数据排序，后台留记录实现</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/19</span><a class="archive-post-title" href= "/2018/12/19/springboot-swagger生成文档/" >springboot swagger生成文档</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/11</span><a class="archive-post-title" href= "/2018/12/11/springboot-pgsql-时间查询遇见的小问题/" >springboot+pgsql 时间查询遇见的小问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/03</span><a class="archive-post-title" href= "/2018/12/03/Mybatas-Plus-配置实体类公共字段/" >Mybatas Plus 配置实体类公共字段</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/24</span><a class="archive-post-title" href= "/2018/11/24/杂谈-近期回顾/" >杂谈-近期回顾</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2018/11/15/springboot-long型ID精度丢失问题/" >springboot long型ID精度丢失问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/05</span><a class="archive-post-title" href= "/2018/11/05/java类加载顺序/" >java类加载顺序</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/01</span><a class="archive-post-title" href= "/2018/11/01/学习工作中遇见的异常/" >学习工作中遇见的异常</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span><a class="archive-post-title" href= "/2018/10/23/为什么c-比java快/" >为什么c++比java快</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/22</span><a class="archive-post-title" href= "/2018/10/22/学习路线/" >学习路线</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/22</span><a class="archive-post-title" href= "/2018/10/22/心怀畏惧，砥砺前行/" >心怀畏惧，砥砺前行</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/14</span><a class="archive-post-title" href= "/2018/10/14/springboot-hibernate处理text格式数据/" >springboot hibernate处理text格式数据</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/07</span><a class="archive-post-title" href= "/2018/10/07/vue-ts-diy分页组件实现/" >vue + ts diy分页组件实现</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/24</span><a class="archive-post-title" href= "/2018/09/24/分享vip视频免费看的方法/" >分享vip视频免费看的方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2018/09/23/java短信接口实现短信验证码注册登录/" >java短信接口实现短信验证码注册登录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/19</span><a class="archive-post-title" href= "/2018/09/19/springBoot使用redis/" >springBoot使用redis</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/19</span><a class="archive-post-title" href= "/2018/09/19/redis安装使用/" >redis安装使用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/14</span><a class="archive-post-title" href= "/2018/09/14/markdown-0/" >markdown 语法</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="markdown"><span class="iconfont-archer">&#xe606;</span>markdown</span>
+    
+        <span class="sidebar-tag-name" data-tags="java"><span class="iconfont-archer">&#xe606;</span>java</span>
+    
+        <span class="sidebar-tag-name" data-tags="springboot"><span class="iconfont-archer">&#xe606;</span>springboot</span>
+    
+        <span class="sidebar-tag-name" data-tags="hibernate"><span class="iconfont-archer">&#xe606;</span>hibernate</span>
+    
+        <span class="sidebar-tag-name" data-tags="mybatis"><span class="iconfont-archer">&#xe606;</span>mybatis</span>
+    
+        <span class="sidebar-tag-name" data-tags="vue"><span class="iconfont-archer">&#xe606;</span>vue</span>
+    
+        <span class="sidebar-tag-name" data-tags="typescript"><span class="iconfont-archer">&#xe606;</span>typescript</span>
+    
+        <span class="sidebar-tag-name" data-tags="jvm"><span class="iconfont-archer">&#xe606;</span>jvm</span>
+    
+        <span class="sidebar-tag-name" data-tags="其他"><span class="iconfont-archer">&#xe606;</span>其他</span>
+    
+        <span class="sidebar-tag-name" data-tags="redis"><span class="iconfont-archer">&#xe606;</span>redis</span>
+    
+        <span class="sidebar-tag-name" data-tags="posrtgresql"><span class="iconfont-archer">&#xe606;</span>posrtgresql</span>
+    
+        <span class="sidebar-tag-name" data-tags="杂谈"><span class="iconfont-archer">&#xe606;</span>杂谈</span>
+    
+        <span class="sidebar-tag-name" data-tags="功能实现"><span class="iconfont-archer">&#xe606;</span>功能实现</span>
+    
+        <span class="sidebar-tag-name" data-tags="短信接口"><span class="iconfont-archer">&#xe606;</span>短信接口</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="其他"><span class="iconfont-archer">&#xe60a;</span>其他</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "大腿君的大腿君"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
