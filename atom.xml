@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://shiyuquan.github.io/"/>
-  <updated>2019-01-23T02:32:44.235Z</updated>
+  <updated>2019-01-25T05:24:32.443Z</updated>
   <id>https://shiyuquan.github.io/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>记录看完java编程思想</title>
+    <link href="https://shiyuquan.github.io/2019/01/25/%E8%AE%B0%E5%BD%95%E7%9C%8B%E5%AE%8Cjava%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/"/>
+    <id>https://shiyuquan.github.io/2019/01/25/记录看完java编程思想/</id>
+    <published>2019-01-25T02:19:13.000Z</published>
+    <updated>2019-01-25T05:24:32.443Z</updated>
+    
+    <content type="html"><![CDATA[<p>前些天勉强算是看完了java编程思想，细想来有很多的东西说，碍于本身表达能力不足且对书的理解不到位，在这里就现在能想的随便说说<br><a id="more"></a><br>从开始看这本书到现在，过去了将近五个月。开始看书的基础部分，前几章的时候，看得很快，感觉大多数都是我知道的，但也有很多操作让我耳目一新。这个过程过地很快，就打算一两个月看完的。</p><p>事实证明我还是年轻的。前几章基础的东西依旧让我受益良多，当书本开始有更深的讲解时，我发现我可能一页纸就要想好久。作者讲的很透彻，其思想让我着迷。而愚昧如我，还是很难理解其中的奥秘。书中讲述其实也不全是基础。其中涉及到了很多的涉及模式，这是最让我废时间去理解的地方。往往没见识到一种新的设计模式我都会感叹：代码还能这样写。着实让我认识到了编程是非常需要想法的。</p><p>看书是在工作之余的时间进行的。</p><p>从看书到现在，花费时间多的一个原因就是需要工作。但这其实在我预期的，却超出了预期的时间。另外一个点就是设计模式的理解。最后就是看书的过程中，结合着书本所讲的方面，顺带看了些jdk的源码。看源码也是非常花费时间的。源码里面涉及到了很多的算法，需要花时间研究。源码里面无时无刻不关联设计模式，往往看代码能懂他干嘛用，却不懂为何这样用，更甚者，不了解设计模式的话代码都看不懂。看源码的过程痛并快乐着。他们的代码简洁明了，风格清晰。对比我所接触的开发中的代码，我都嫌弃我自己。但就现在接触，自认为代码比上他人还是有所优势的。</p><p>源码过程有个副产品。是个针对当下的副产品，却是以后必备的知识–jvm。就java展现在众人面前的东西仅仅是给人用的。其中很多的流向，或者更深的层次是我们所看不到的，如果想要了解就必须学习jvm。其实jdk源码就涉及到了c语言和汇编，这又是两个硬骨头，难办。</p><p>最后说一下，java编程思想我实际上是没看完的，i/o和并发的章节没看，原因是这两部分的内容我将会在接下来学习的路线中，做专门的学习。图形化的章节没看是因为当下，或者以后可能都用不到。</p><p>看这本书的初衷，是想要提升技术能力并加强基础知识的理解。而其更让我惊艳的是它所表现出来的思想。严谨而华丽。</p><p><img src="https://source.unsplash.com/random" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前些天勉强算是看完了java编程思想，细想来有很多的东西说，碍于本身表达能力不足且对书的理解不到位，在这里就现在能想的随便说说&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="杂谈" scheme="https://shiyuquan.github.io/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
   
   <entry>
     <title>时间处理类</title>
@@ -413,28 +433,6 @@
     
     
       <category term="redis" scheme="https://shiyuquan.github.io/tags/redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>markdown 语法</title>
-    <link href="https://shiyuquan.github.io/2018/09/14/markdown-0/"/>
-    <id>https://shiyuquan.github.io/2018/09/14/markdown-0/</id>
-    <published>2018-09-14T06:16:37.000Z</published>
-    <updated>2018-09-14T06:19:25.406Z</updated>
-    
-    <content type="html"><![CDATA[<p>第一篇博客，记录博客写法。博客使用<a href="http://www.markdown.cn/" target="_blank" rel="noopener">markdown</a>语法，本文记录其大致语法规范<br><a id="more"></a></p><h2 id="TOC"><a href="#TOC" class="headerlink" title="TOC"></a>TOC</h2><p>根据标题生成目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[TOC]</span><br></pre></td></tr></table></figure></p><p>示例(..没兼容到)<br>[TOC]</p><h2 id="1-标题"><a href="#1-标题" class="headerlink" title="1.标题"></a>1.标题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 这是一级标题</span><br><span class="line">## 这是二级标题</span><br><span class="line">### 这是三级标题</span><br><span class="line">#### 这是四级标题</span><br><span class="line">##### 这是五级标题</span><br><span class="line">###### 这是六级标题</span><br><span class="line">or</span><br><span class="line">一级标题</span><br><span class="line">===</span><br><span class="line">二级标</span><br><span class="line">---</span><br></pre></td></tr></table></figure><p>示例</p><h1 id="这是一级标题"><a href="#这是一级标题" class="headerlink" title="这是一级标题"></a>这是一级标题</h1><h2 id="这是二级标题"><a href="#这是二级标题" class="headerlink" title="这是二级标题"></a>这是二级标题</h2><h3 id="这是三级标题"><a href="#这是三级标题" class="headerlink" title="这是三级标题"></a>这是三级标题</h3><h4 id="这是四级标题"><a href="#这是四级标题" class="headerlink" title="这是四级标题"></a>这是四级标题</h4><h5 id="这是五级标题"><a href="#这是五级标题" class="headerlink" title="这是五级标题"></a>这是五级标题</h5><h6 id="这是六级标题"><a href="#这是六级标题" class="headerlink" title="这是六级标题"></a>这是六级标题</h6><h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标"><a href="#二级标" class="headerlink" title="二级标"></a>二级标</h2><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;引用的</span><br><span class="line">&gt;&gt;这也是</span><br></pre></td></tr></table></figure><p>示例</p><blockquote><p>引用的</p><blockquote><p>这也是</p></blockquote></blockquote><h2 id="斜体和粗体"><a href="#斜体和粗体" class="headerlink" title="斜体和粗体"></a>斜体和粗体</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*这是斜体* 或 _这也是斜体_ </span><br><span class="line">**这是粗体**</span><br><span class="line">***这是加粗斜体***</span><br><span class="line">~~这是删除线~~</span><br></pre></td></tr></table></figure><p>示例<br><em>这是斜体</em> 或 <em>这也是斜体</em><br><strong>这是粗体</strong><br><strong><em>这是加粗斜体</em></strong><br><del>这是删除线</del></p><h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">***</span><br></pre></td></tr></table></figure><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>balabala</p><hr><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">单行代码：代码之间分别用一个反引号包起来</span><br><span class="line">代码块：代码之间分别用三个反引号包起来，且两边的反引号单独占一行,三个反引号后加编程语言，提供颜色支持</span><br><span class="line">tab缩进：</span><br></pre></td></tr></table></figure><p>示例<br>单行代码<br><code>balabala</code><br>代码块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">balabala</span><br></pre></td></tr></table></figure></p><pre><code>巴腊拉巴</code></pre><p>javascript<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    num+=i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(num);</span><br></pre></td></tr></table></figure></p><p>java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[超链接名](超链接地址 &quot;超链接title&quot;)</span><br><span class="line">title可加可不加</span><br><span class="line">行内形式：[我的博客](https://kevinpu.github.io/)</span><br><span class="line">参考形式：[我的博客][1]，有一个很好的平台-[简书][2]</span><br><span class="line">[1]:https://kevinpu.github.io/</span><br><span class="line">[2]:http://www.jianshu.com/</span><br><span class="line">自动链接：我的博客地址&lt;https://kevinpu.github.io/&gt;</span><br></pre></td></tr></table></figure><p>示例<br>行内形式：<a href="https://kevinpu.github.io/" target="_blank" rel="noopener">我的博客</a><br>参考形式：[我的博客][1]，有一个很好的平台-[简书][2]<br>[1]:<a href="https://kevinpu.github.io/" target="_blank" rel="noopener">https://kevinpu.github.io/</a><br>[2]:<a href="http://www.jianshu.com/" target="_blank" rel="noopener">http://www.jianshu.com/</a><br>自动链接：我的博客地址<a href="https://kevinpu.github.io/" target="_blank" rel="noopener">https://kevinpu.github.io/</a></p><h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>无序列表：<br>无序列表用 - + * 任何一种都可以<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- 列表内容</span><br><span class="line">+ 列表内容</span><br><span class="line">* 列表内容</span><br><span class="line">注意：- + * 跟内容之间都要有一个空格</span><br></pre></td></tr></table></figure></p><p>无序列表效果：</p><ul><li>无序列表项1</li></ul><ul><li>无序列表项2</li></ul><ul><li>无序列表项3</li></ul><p>有序列表：<br>有序列表使用数字加点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.有序列表项1</span><br><span class="line">2.有序列表项2</span><br><span class="line">3.有序列表项3</span><br></pre></td></tr></table></figure></p><p>有序列表效果：<br>1.有序列表项1<br>2.有序列表项2<br>3.有序列表项3</p><p>列表嵌套：</p><ul><li>无序列表项1<ul><li>二级</li><li>二级</li></ul></li></ul><ul><li>无序列表项2</li></ul><h2 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">![图片alt](图片地址 &apos;&apos;图片title&apos;&apos;)</span><br><span class="line"></span><br><span class="line">图片alt就是显示在图片下面的文字，相当于对图片内容的解释。</span><br><span class="line">图片title是图片的标题，当鼠标移到图片上时显示的内容。title可加可不加</span><br></pre></td></tr></table></figure><p>示例<br><img src="/images/logo.png" alt="&quot;vue&quot;" title="vue"></p><h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">表头|表头|表头</span><br><span class="line">---|:--:|---:</span><br><span class="line">内容|内容|内容</span><br><span class="line">内容|内容|内容</span><br><span class="line"></span><br><span class="line">第二行分割表头和内容。</span><br><span class="line">- 有一个就行，为了对齐，多加了几个</span><br><span class="line">文字默认居左</span><br><span class="line">-两边加：表示文字居中</span><br><span class="line">-右边加：表示文字居右</span><br><span class="line">注：原生的语法两边都要用 | 包起来。此处省略</span><br></pre></td></tr></table></figure><p>示例<br>| 表头1|表头2|表头3|表头4<br>|-| :- | :-: | -: |<br>|默认左对齐|左对齐|居中对其|右对齐|<br>|默认左对齐|左对齐|居中对其|右对齐|<br>|默认左对齐|左对齐|居中对其|右对齐|</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;第一篇博客，记录博客写法。博客使用&lt;a href=&quot;http://www.markdown.cn/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;markdown&lt;/a&gt;语法，本文记录其大致语法规范&lt;br&gt;
-    
-    </summary>
-    
-      <category term="其他" scheme="https://shiyuquan.github.io/categories/%E5%85%B6%E4%BB%96/"/>
-    
-    
-      <category term="markdown" scheme="https://shiyuquan.github.io/tags/markdown/"/>
     
   </entry>
   
