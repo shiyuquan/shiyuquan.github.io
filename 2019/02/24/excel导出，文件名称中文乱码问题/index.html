@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>大腿的博客</title>
+    <title>excel导出，文件名称中文乱码问题 · 大腿的博客</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >大腿的博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">excel导出，文件名称中文乱码问题</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>大腿的博客</a>
 </header>
@@ -220,24 +231,74 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(https://source.unsplash.com/random)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            excel导出，文件名称中文乱码问题
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "java">java</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">633</span>阅读时长: <span class="post-count reading-time">2 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/02/24</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,72 +399,60 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/09/19/redis安装使用/" >
-            
-                <span>redis安装使用</span>
-        </a>
-        <div class="abstract-content">
-            <p>做手机短信验证的时候，考虑验证码的存放问题使用说明方式。因为验证码的时效性，放入关系数据库可以实现，但是较麻烦。最终想到缓存可以完美实现，正好没用过也想学redis，就顺带学习redis使用和安装。<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/19</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "redis">redis</a>
-    
-</div>
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>记录一个excel导出遇见的中文名称的问题<br><a id="more"></a></p>
+<h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>接到项目需要有excel的导入导出功能，基于poi实现还是挺简单的，文件的导入导出都已经实现，但是导出给前台的文件名称总是乱码，一开始以为是我后台的问题，我找解决方法找了两天但是都不外乎就那几个。最后发现是前台的代码问题…</p>
+<h1 id="后台导出代码"><a href="#后台导出代码" class="headerlink" title="后台导出代码"></a>后台导出代码</h1><p>controller接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ApiOperation</span>(value = <span class="string">"导出模板"</span>, notes = <span class="string">"导出模板"</span>)</span><br><span class="line"><span class="meta">@GetMapping</span>(value = <span class="string">"export-template"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">exportTemplate</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 设置的中文文件名</span></span><br><span class="line">    String fileName = <span class="string">"模板.xls"</span>;</span><br><span class="line">    <span class="comment">// 设置excel的头</span></span><br><span class="line">    String[] title = &#123;<span class="string">"姓名"</span>, <span class="string">"性别"</span>, <span class="string">"年龄"</span>&#125;;</span><br><span class="line">    <span class="comment">// 自定义的excel工具，创建工作簿。</span></span><br><span class="line">    WorkBook wb = ExcelUtil.createExcel(fileName, title);</span><br><span class="line">    <span class="comment">// 导出流</span></span><br><span class="line">    ExcelUtil.binaryOut(request, response, wb, fileName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里重点在binaryOut()方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExcelUtil</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">binaryOut</span><span class="params">(HttpServletRequest request, HttpServletResponse response, WorkBook wb, String fileName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> (OutputString os = response.getOutputStream()) &#123;</span><br><span class="line">            <span class="comment">// 设置响应头</span></span><br><span class="line">            setResponseHeader(request, response, fileName);</span><br><span class="line">            wb.write(os);</span><br><span class="line">            wb.close();</span><br><span class="line">            os.flush();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setResponseHeader</span><span class="params">(HttpServletRequest request, HttpServletResponse response, String fileName)</span> </span>&#123;</span><br><span class="line">        String userAgent = request.getHeader(<span class="string">"USER-AGENT"</span>);</span><br><span class="line">        String finalFileName = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 处理不同浏览器的文件名乱码问题</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (org.apache.commons.lang3.StringUtils.contains.contains(userAgent, <span class="string">"MSIE"</span>)) &#123;</span><br><span class="line">                    <span class="comment">// IE</span></span><br><span class="line">                    finalFileName = URLEncoder.encode(fileName, <span class="string">"UTF8"</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (org.apache.commons.lang3.StringUtils.contains.contains(userAgent, <span class="string">"Mozilla"</span>)) &#123;</span><br><span class="line">                    <span class="comment">// 火狐，谷歌</span></span><br><span class="line">                    finalFileName = <span class="keyword">new</span> String(fileName.getBytes(), <span class="string">"ISO-8859-1"</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 其他</span></span><br><span class="line">                    finalFileName = URLEncoder.encode(fileName, <span class="string">"UTF8"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (UnsupportedEncodingException ue) &#123;</span><br><span class="line">                ue.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            response.setContentType(<span class="string">"applicaction/vnd.ms-excel"</span>);</span><br><span class="line">            <span class="comment">// 设置文件名</span></span><br><span class="line">            response.setHeader(<span class="string">"Content-Disposition"</span>, <span class="string">"attachment; filename="</span> + finalFileName);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，导出的功能完成了，并且在本地测试都成功，文件名也是预设中文名。但是前端调用接口输出的文件就不是我们的中文。问题出在了前端的处理方式上。</p>
+<h1 id="前端代码"><a href="#前端代码" class="headerlink" title="前端代码"></a>前端代码</h1><p>前端一开始的处理方式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span>(res) &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">let</span> blob = <span class="keyword">new</span> Blob([res], &#123;<span class="attr">type</span>: <span class="string">"application/vnd.ms-excel"</span>&#125;); </span><br><span class="line">　　<span class="keyword">let</span> objectUrl = URL.createObjectURL(blob); </span><br><span class="line">　　<span class="built_in">window</span>.location.href = objectUrl; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>res是请求后台得到的response。前端这里直接将response的流拿出来生成blob，再将blob转文件。这种方式下载的文件只有文件内容。如果代码不去手动设置文件名称的话，浏览器会自动给生成的文件一个序列号，后缀名是头里面设置的Contant-Type对应的后缀名。</p>
+<p>代码使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.location.href = <span class="string">"host:port/export-template"</span></span><br></pre></td></tr></table></figure>
+<p>直接用浏览器打开下载的api就可以了。至于为什么浏览器会直接下载还有不知道。</p>
+<p><img src="https://source.unsplash.com/random" alt=""></p>
+
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/09/14/markdown-0/" >
-            
-                <span>markdown 语法</span>
-        </a>
-        <div class="abstract-content">
-            <p>第一篇博客，记录博客写法。博客使用<a href="http://www.markdown.cn/" target="_blank" rel="noopener">markdown</a>语法，本文记录其大致语法规范<br>
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://shiyuquan.github.io">大腿君的大腿君</a>
+            <p>原文链接：<a href="https://shiyuquan.github.io/2019/02/24/excel导出，文件名称中文乱码问题/">https://shiyuquan.github.io/2019/02/24/excel导出，文件名称中文乱码问题/</a>
+            <p>发表日期：<a href="https://shiyuquan.github.io/2019/02/24/excel导出，文件名称中文乱码问题/">2019-02-24 14:10:48</a>
+            <p>更新日期：<a href="https://shiyuquan.github.io/2019/02/24/excel导出，文件名称中文乱码问题/">2019-02-24 15:14:26</a>
+            <p>版权声明：来自于<a rel="license" href="">大腿</a>的许可</p>
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/14</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "markdown">markdown</a>
-    
-</div>
-            
-        </div>
-    </article>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">下一篇</div>
+                <a href= "/2019/01/25/记录看完java编程思想/" title= "记录看完java编程思想">
+                    <div class="prevTitle">记录看完java编程思想</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
-    <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/page/2/">&#60; PREV</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
     
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -492,6 +541,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#场景"><span class="toc-number">1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#后台导出代码"><span class="toc-number">2.</span> <span class="toc-text">后台导出代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#前端代码"><span class="toc-number">3.</span> <span class="toc-text">前端代码</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1036,6 +1103,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
