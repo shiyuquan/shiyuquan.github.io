@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>大腿的博客</title>
+    <title>代码检测工具-sonarqube安装使用 · 大腿的博客</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >大腿的博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">代码检测工具-sonarqube安装使用</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>大腿的博客</a>
 </header>
@@ -220,24 +231,76 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(https://source.unsplash.com/random)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            代码检测工具-sonarqube安装使用
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "代码检测">代码检测</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "工具">工具</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">816</span>阅读时长: <span class="post-count reading-time">3 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/03/06</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,130 +401,65 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/24/杂谈-近期回顾/" >
-            
-                <span>杂谈-近期回顾</span>
-        </a>
-        <div class="abstract-content">
-            <p>突然想起来好久没写东西了，近期也没什么特别想写的，就回顾一下前些天的东西吧<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/24</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "杂谈">杂谈</a>
-    
-</div>
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>公司安排代码检测的任务，使用sonarqube，记录windows下安装使用过程。<br><a id="more"></a></p>
+<h1 id="sonarqube-安装"><a href="#sonarqube-安装" class="headerlink" title="sonarqube 安装"></a>sonarqube 安装</h1><p><a href="https://www.sonarqube.org/downloads/" target="_blank" rel="noopener">官方下载</a></p>
+<p><a href="https://blog.csdn.net/weixin_40861707/article/details/82117232" target="_blank" rel="noopener">安装的教程，我跟着这篇博客来的</a></p>
+<p>安装过程很简单,安装数据库mysql有版本限制，上面博客里有讲。</p>
+<h1 id="使用sonarqube"><a href="#使用sonarqube" class="headerlink" title="使用sonarqube"></a>使用sonarqube</h1><p>sonar安装完了，还没能分析项目。<a href="https://docs.sonarqube.org/display/SCAN" target="_blank" rel="noopener">官方给的分析方式</a><br>我使用了本地项目扫描的方式和maven的扫描方式。前端项目暂时只在本地分析过。结合jenkins在git上能不能用没试过。</p>
+<h2 id="本地扫描，安装sonar-scanner"><a href="#本地扫描，安装sonar-scanner" class="headerlink" title="本地扫描，安装sonar-scanner"></a>本地扫描，安装sonar-scanner</h2><p><a href="https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner" target="_blank" rel="noopener">官方下载</a><br>下载完解压。将文件的<code>../sonar-scanner-3.3.0.1492-windows/bin</code>目录添加到系统变量，后面运行dos命令需要。</p>
+<p>进入<code>../sonar-scanner-3.3.0.1492-windows/conf</code>目录，里面有个<code>sonar-scanner.properties</code>文件。我们对它进行编辑</p>
+<p>sonar-scanner.properties<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#Configure here general information about the environment, such as SonarQube server connection details for example</span><br><span class="line">#No information about specific project should appear here</span><br><span class="line"></span><br><span class="line">#----- Default SonarQube server</span><br><span class="line">sonar.host.url=http:<span class="comment">//localhost:9000</span></span><br><span class="line"></span><br><span class="line">#----- Default source code encoding</span><br><span class="line">sonar.sourceEncoding=UTF<span class="number">-8</span></span><br><span class="line"></span><br><span class="line"># must be unique in a given SonarQube instance</span><br><span class="line">sonar.projectKey =bleg-blog</span><br><span class="line"></span><br><span class="line"># 这是SonarQube UI中显示的名称和版本。</span><br><span class="line">sonar.projectName =bleg-blog</span><br><span class="line"></span><br><span class="line"># 版本</span><br><span class="line">sonar.projectVersion = <span class="number">1.0</span><span class="number">.0</span></span><br><span class="line"></span><br><span class="line"># 配置要分析的项目根目录</span><br><span class="line">sonar.projectBaseDir =E:<span class="regexp">/Code/</span>BlegBlog/bleg-blog</span><br><span class="line"></span><br><span class="line"># 配置包含源文件的目录（未设置，则从默认的Maven源代码位置检索）</span><br><span class="line">sonar.sources=./src</span><br><span class="line"></span><br><span class="line"># SonarJava 4.12 以后，不使用Maven等构建工具分析代码，则必须手动提供对应源代码的字节码</span><br><span class="line"># 此处配置该项目的子项目的class字节码文件目录</span><br><span class="line">sonar.java.binaries=./target/classes</span><br><span class="line"></span><br><span class="line"># 指定分析的语言，可不配</span><br><span class="line">sonar.language=java</span><br></pre></td></tr></table></figure></p>
+<p>接下来dos命令到<code>sonar-scanner-3.3.0.1492-windows</code>目录，运行<code>sonar-scanner</code>命令，等待分析。分析成功了进到sonar页面看分析的结果</p>
+<p>这里分析可能有个问题，就是页面上没有配置可用的规则的话，会分析不成功。</p>
+<p>页面上有个覆盖率的统计，是统计代码测试用例对代码的覆盖率。本地扫描我没有进行测试文件的扫描，实际上是不知道怎么扫所以没做。</p>
+<h2 id="maven扫描"><a href="#maven扫描" class="headerlink" title="maven扫描"></a>maven扫描</h2><p><a href="https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner+for+Maven" target="_blank" rel="noopener">官方的maven扫描</a></p>
+<p>这里顺便把测试用例的覆盖率一起讲了<br><a href="https://ningyu1.github.io/site/post/77-jenkins-sonarqube-jacoco-junit/" target="_blank" rel="noopener">测试用例的覆盖率，jacoco，junit扫描的，我参考的这篇博客</a></p>
+<p>这个过程会出现一系列问题，上面博客说了一些。这里补充一点。<br>maven自带的<code>maven-surefire-plugin</code>插件跑测试代码打包，必须保证测试代码没有问题，没有报错。否则会打包失败。他会列出你哪些测试方法有问题，跟着改完就好。</p>
+<h1 id="sonar-自定义规则。"><a href="#sonar-自定义规则。" class="headerlink" title="sonar 自定义规则。"></a>sonar 自定义规则。</h1><p>规则自定义有两种，一种是xml的形式，一种是java的形式。xml的功能没那么强大，有很多束缚。相对来说写java代码实现更强大方便对我更友好。</p>
+<p><a href="https://github.com/SonarSource/sonar-custom-rules-examples" target="_blank" rel="noopener">官方的自定义规则示例</a><br><a href="https://blog.csdn.net/duyuew/article/details/82216197" target="_blank" rel="noopener">参考博客</a><br>把官方项目拉下来自己研究吧。这个的插件开发比较简单点，主要在于公开到二开的人手里面基本上可以直接重写对应的方法实现，规则注册，插件安装都很简单。我还在研究中。</p>
+<p><img src="https://source.unsplash.com/random" alt=""></p>
+
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/15/springboot-long型ID精度丢失问题/" >
-            
-                <span>springboot long型ID精度丢失问题</span>
-        </a>
-        <div class="abstract-content">
-            <p>数据库主键设计为Long，新增查询发现id和数据库不一样，记录了解的信息。<br>
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://shiyuquan.github.io">大腿君的大腿君</a>
+            <p>原文链接：<a href="https://shiyuquan.github.io/2019/03/06/代码检测工具-sonarqube安装使用/">https://shiyuquan.github.io/2019/03/06/代码检测工具-sonarqube安装使用/</a>
+            <p>发表日期：<a href="https://shiyuquan.github.io/2019/03/06/代码检测工具-sonarqube安装使用/">2019-03-06 18:14:18</a>
+            <p>更新日期：<a href="https://shiyuquan.github.io/2019/03/06/代码检测工具-sonarqube安装使用/">2019-03-06 19:04:37</a>
+            <p>版权声明：来自于<a rel="license" href="">大腿</a>的许可</p>
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/15</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "java">java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "springboot">springboot</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/05/java类加载顺序/" >
-            
-                <span>java类加载顺序</span>
-        </a>
-        <div class="abstract-content">
-            <p>阅读《java编程思想》看到了java类加载的一点东西，通过查阅资料总结一下我对java类加载顺序的个人理解<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/05</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "java">java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "jvm">jvm</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/01/学习工作中遇见的异常/" >
-            
-                <span>学习工作中遇见的异常</span>
-        </a>
-        <div class="abstract-content">
-            <p>自二〇一八年十一月一日 农历九月廿四 始<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/01</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "其他">其他</a>
-    
-</div>
-            
-        </div>
-    </article>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">下一篇</div>
+                <a href= "/2019/02/24/excel导出，文件名称中文乱码问题/" title= "excel导出，文件名称中文乱码问题">
+                    <div class="prevTitle">excel导出，文件名称中文乱码问题</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -550,6 +548,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#sonarqube-安装"><span class="toc-number">1.</span> <span class="toc-text">sonarqube 安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用sonarqube"><span class="toc-number">2.</span> <span class="toc-text">使用sonarqube</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#本地扫描，安装sonar-scanner"><span class="toc-number">2.1.</span> <span class="toc-text">本地扫描，安装sonar-scanner</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#maven扫描"><span class="toc-number">2.2.</span> <span class="toc-text">maven扫描</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sonar-自定义规则。"><span class="toc-number">3.</span> <span class="toc-text">sonar 自定义规则。</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1126,6 +1142,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
