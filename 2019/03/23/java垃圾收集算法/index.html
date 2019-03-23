@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>大腿的博客</title>
+    <title>java垃圾收集算法 · 大腿的博客</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >大腿的博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">java垃圾收集算法</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>大腿的博客</a>
 </header>
@@ -220,24 +231,78 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(https://source.unsplash.com/random)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            java垃圾收集算法
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "java">java</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "算法">算法</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "jvm">jvm</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">1.4k</span>阅读时长: <span class="post-count reading-time">4 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/03/23</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,310 +403,60 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/12/19/springboot-swagger生成文档/" >
-            
-                <span>springboot swagger生成文档</span>
-        </a>
-        <div class="abstract-content">
-            <p>工作上前后台分离，有时候接口定义没定好导致开发阶段要修改接口，前台要接口每次都来问，想要及时改好的接口文档。两边都挺麻烦的。我项目里面使用了swagger有页面的文档，能不能生成静态文件呢？结果还真的可以，美滋滋<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/19</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "java">java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "springboot">springboot</a>
-    
-</div>
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>摘抄于深入理解java虚拟机的垃圾收集算法章节。<br><a id="more"></a></p>
+<h1 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h1><p>最基础的收算法是“标记-清除”（Mark-Sweep）算法，如同它的名字一样，算法分为“标记”和“清除”两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收所有标记的对象，它的标记过程其实在前一节讲述对象标记判定时一已经介绍过了。之所以说它是最基础的收集算法，是因为后续的收集算法都是基于这种思路并对其不足进行改进而得到的。它的主要不足之处有两个：</p>
+<ol>
+<li>一个是效率问题，标记和清除两个过程的效率都不高。</li>
+<li>另一个是空间问题，标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致以后在程序运行过程中需要分配较大对象时，无法找到足够的连续内存而得不到提前触发另一次垃圾回收动作。标记-清除算法执行过程图如下。<br><img src="/images/垃圾收集算法-标记清除.jpg" alt=""></li>
+</ol>
+<h1 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h1><p>为了解决效率问题，一种称为复制(Copying)的收集算法出现了，它将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。当这一块内存用完了，就将还存活着的对象复制到另外一块上，然后再把已经使用过的内存空间一次清理掉。这样使得每次都是对整个半区进行内存回收，内存分配时也就不用考虑内存碎片等复杂情况，只要移动堆顶指针，按顺序分配内存即可，实现简单，运行高效。代价是内存缩小为原来的一半。<br><img src="/images/垃圾收集算法-复制.jpg" alt=""><br>商业虚拟机用这个回收算法来回收新生代。IBM研究表明98%的对象是“朝生夕死“，不需要按照1-1的比例来划分内存空间，而是将内存分为一块较大的”Eden“空间和两块较小的Survivor空间，每次使用Eden和其中一块Survivor。当回收时，将Eden和Survivor中还存活的对象一次性复制到另外一个Survivor空间上，最后清理掉Eden和刚才用过的Survivor空间。Hotspot虚拟机默认Eden和Survivor的比例是8-1.即每次可用整个新生代的90%, 只有一个survivor，即1/10被”浪费“。当然，98%的对象回收只是一般场景下的数据，我们没有办法保证每次回收都只有不多于10%的对象存活，当Survivor空间不够时，需要依赖其他内存(老年代)进行分配担保(Handle Promotion).</p>
+<p>内存的分配担保就好比我们去银行借款，如果我们信誉很好，在98%的情况下都能按时偿还，于是银行可能会默认我们下一次也能按时按量地偿还贷款，只需要有一个担保人能保证如果我不能还款时，可以从他的账户扣钱，那银行就认为没有风险了。内存的分配担保也一样，如果另外一块Survivor空间没有足够空间存放上一次新生代收集下来的存活对象时，这些对象将直接通过分配担保机制进入老年代。关于对新生代进行分配担保的内容，在本章稍后在讲解垃圾收集器执行规则时还会再详细讲解。</p>
+<h1 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h1><p>复制收集算法在对象存活率较高时就要进行较多的复制操作，效率将会变低。更关键的是，如果不想浪费50%的空间，就需要有额外的空间进行分配担保，以应对被使用的内存中所有对象都100%存活的极端情况，所以在老年代一般不能直接选用这种算法。</p>
+<p>根据老年代的特点，有人提出了另外一种“标记-整理”（Mark-Compact）算法，标记过程仍然与“标记-清除”算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存，“标记-整理”算法的示意图如图3-4所示。<br><img src="/images/垃圾收集算法-标记整理.jpg" alt=""></p>
+<h1 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h1><p>当前商业虚拟机的垃圾收集都采用“分代收集”（Generational Collection）算法，这种算法并没有什么新的思想，只是根据对象存活周期的不同将内存划分为几块。一般是把Java堆分为新生代和老年代，这样就可以根据各个年代的特点采用最适当的收集算法。在新生代中，每次垃圾收集时都发现有大批对象死去，只有少量存活，那就选用复制算法，只需要付出少量存活对象的复制成本就可以完成收集。而老年代中因为对象存活率高、没有额外空间对它进行分配担保，就必须使用“标记—清理”或者“标记—整理”算法来进行回收。</p>
+<h1 id="《深入理解Java虚拟机》第3章-垃圾收集器与内存分配策略"><a href="#《深入理解Java虚拟机》第3章-垃圾收集器与内存分配策略" class="headerlink" title="《深入理解Java虚拟机》第3章 垃圾收集器与内存分配策略"></a><a href="https://blog.csdn.net/huaxun66/article/details/53782307" target="_blank" rel="noopener">《深入理解Java虚拟机》第3章 垃圾收集器与内存分配策略</a></h1><p><img src="https://source.unsplash.com/random" alt=""></p>
+
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/12/11/springboot-pgsql-时间查询遇见的小问题/" >
-            
-                <span>springboot+pgsql 时间查询遇见的小问题</span>
-        </a>
-        <div class="abstract-content">
-            <p>又是一周没写博客，想起来就写一个刚遇见的小问题吧<br>
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://shiyuquan.github.io">大腿君的大腿君</a>
+            <p>原文链接：<a href="https://shiyuquan.github.io/2019/03/23/java垃圾收集算法/">https://shiyuquan.github.io/2019/03/23/java垃圾收集算法/</a>
+            <p>发表日期：<a href="https://shiyuquan.github.io/2019/03/23/java垃圾收集算法/">2019-03-23 14:13:25</a>
+            <p>更新日期：<a href="https://shiyuquan.github.io/2019/03/23/java垃圾收集算法/">2019-03-23 14:57:59</a>
+            <p>版权声明：来自于<a rel="license" href="">大腿</a>的许可</p>
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/11</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "springboot">springboot</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "posrtgresql">posrtgresql</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/12/03/Mybatas-Plus-配置实体类公共字段/" >
-            
-                <span>Mybatas Plus 配置实体类公共字段</span>
-        </a>
-        <div class="abstract-content">
-            <p>这段时间接的一个项目，建表要求有公共字段，持久层框架使用MP，有提供支持直接使用，操作很简单。<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/03</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "java">java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "springboot">springboot</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "mybatis">mybatis</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/24/杂谈-近期回顾/" >
-            
-                <span>杂谈-近期回顾</span>
-        </a>
-        <div class="abstract-content">
-            <p>突然想起来好久没写东西了，近期也没什么特别想写的，就回顾一下前些天的东西吧<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/24</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "杂谈">杂谈</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/15/springboot-long型ID精度丢失问题/" >
-            
-                <span>springboot long型ID精度丢失问题</span>
-        </a>
-        <div class="abstract-content">
-            <p>数据库主键设计为Long，新增查询发现id和数据库不一样，记录了解的信息。<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/15</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "java">java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "springboot">springboot</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/05/java类加载顺序/" >
-            
-                <span>java类加载顺序</span>
-        </a>
-        <div class="abstract-content">
-            <p>阅读《java编程思想》看到了java类加载的一点东西，通过查阅资料总结一下我对java类加载顺序的个人理解<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/05</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "java">java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "jvm">jvm</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/01/学习工作中遇见的异常/" >
-            
-                <span>学习工作中遇见的异常</span>
-        </a>
-        <div class="abstract-content">
-            <p>自二〇一八年十一月一日 农历九月廿四 始<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/01</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "其他">其他</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/10/23/为什么c-比java快/" >
-            
-                <span>为什么c++比java快</span>
-        </a>
-        <div class="abstract-content">
-            <p>摘自《Java编程思想》 第五版<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/23</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "java">java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/10/22/学习路线/" >
-            
-                <span>学习路线</span>
-        </a>
-        <div class="abstract-content">
-            <p>厉害的人总是让人惊叹，也不能慢了自己的脚步<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/22</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/10/22/心怀畏惧，砥砺前行/" >
-            
-                <span>心怀畏惧，砥砺前行</span>
-        </a>
-        <div class="abstract-content">
-            <p>一篇杂谈，一点感触<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/22</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "杂谈">杂谈</a>
-    
-</div>
-            
-        </div>
-    </article>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">下一篇</div>
+                <a href= "/2019/03/18/jvm如何判断一个对象是否存活/" title= "jvm如何判断一个对象是否存活">
+                    <div class="prevTitle">jvm如何判断一个对象是否存活</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
-    <nav class="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/archives/2018/page/2/">2</a><a class="extend next" rel="next" href="/archives/2018/page/2/">NEXT &#62;</a>
-    </nav>
     
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -730,6 +545,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#标记-清除算法"><span class="toc-number">1.</span> <span class="toc-text">标记-清除算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#复制算法"><span class="toc-number">2.</span> <span class="toc-text">复制算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#标记-整理算法"><span class="toc-number">3.</span> <span class="toc-text">标记-整理算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分代收集算法"><span class="toc-number">4.</span> <span class="toc-text">分代收集算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#《深入理解Java虚拟机》第3章-垃圾收集器与内存分配策略"><span class="toc-number">5.</span> <span class="toc-text">《深入理解Java虚拟机》第3章 垃圾收集器与内存分配策略</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1322,6 +1155,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
