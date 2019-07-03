@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>大腿的博客</title>
+    <title>面试-2019年7月3日 · 大腿的博客</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -77,6 +77,8 @@
 
     <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
@@ -201,14 +203,23 @@
 </head>
 
     
-        <body class="home-body">
+        <body class="post-body">
     
     
-<header class="header index-header">
+<header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >大腿的博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">面试-2019年7月3日</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>大腿的博客</a>
 </header>
@@ -227,7 +238,7 @@ height:50vh;
     <!-- 主页  -->
     
     
-    <!-- 文章页  -->
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-img" style="background-image: url(https://source.unsplash.com/random)"></div>
@@ -236,8 +247,8 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            大腿的博客
-            <!-- 文章页  -->
+            面试-2019年7月3日
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
@@ -245,12 +256,49 @@ height:50vh;
             <!-- 主页副标题  -->
             
             
-                这是大腿的博客，欢迎大家来骚扰
-            
-            <!-- 文章页  -->
+            <!-- 404 -->
             
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "面试">面试</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">708</span>阅读时长: <span class="post-count reading-time">2 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/07/03</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -351,405 +399,85 @@ height:50vh;
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/12/19/springboot-swagger生成文档/" >
-            
-                <span>springboot swagger生成文档</span>
-        </a>
-        <div class="abstract-content">
-            <p>工作上前后台分离，有时候接口定义没定好导致开发阶段要修改接口，前台要接口每次都来问，想要及时改好的接口文档。两边都挺麻烦的。我项目里面使用了swagger有页面的文档，能不能生成静态文件呢？结果还真的可以，美滋滋<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/19</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "java">java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "springboot">springboot</a>
-    
-</div>
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>记录2019年7月3日日面试题，有很多可提升和不懂的地方。<br><a id="more"></a></p>
+<h1 id="怎么理解数组"><a href="#怎么理解数组" class="headerlink" title="怎么理解数组"></a>怎么理解数组</h1><h2 id="什么是数组"><a href="#什么是数组" class="headerlink" title="什么是数组"></a>什么是数组</h2><p>数组是一种最简单的复合数据类型，它是有序数据的集合，数组中的每个元素具有相同的数据类型，可以用一个统一的数组名和不同的下标来唯一确定数组中的元素。根据数组的维度，可以将其分为一维数组、二维数组和多维数组等。</p>
+<p>总的来说，数组具有以下特点：</p>
+<ol>
+<li>数组可以是一维数组、二维数组或多维数组。</li>
+<li>数值数组元素的默认值为 0，而引用元素的默认值为 null。</li>
+<li>交错数组是数组的数组，因此，它的元素是引用类型，初始化为 null。交错数组元素的维</li>
+<li>度和大小可以不同。</li>
+<li>数组的索引从 0 开始，如果数组有 n 个元素，那么数组的索引是从 0 到（n-1）。</li>
+<li>数组元素可以是任何类型，包括数组类型。</li>
+<li>数组类型是从抽象基类 Array 派生的引用类型。</li>
+</ol>
+<h2 id="数组的优缺点"><a href="#数组的优缺点" class="headerlink" title="数组的优缺点"></a>数组的优缺点</h2><p>优点： </p>
+<ol>
+<li>按照索引查询元素速度快 </li>
+<li>能存储大量数据 </li>
+<li>按照索引遍历数组方便</li>
+</ol>
+<p>缺点： </p>
+<ol>
+<li>根据内容查找元素速度慢 </li>
+<li>数组的大小一经确定不能改变。 </li>
+<li>数组只能存储一种类型的数据 </li>
+<li>增加、删除元素效率慢 </li>
+<li>未封装任何方法，所有操作都需要用户自己定义</li>
+</ol>
+<h2 id="这个题目太难回答了，和用OO的思想说一下你的项目一个级别的"><a href="#这个题目太难回答了，和用OO的思想说一下你的项目一个级别的" class="headerlink" title="这个题目太难回答了，和用OO的思想说一下你的项目一个级别的"></a>这个题目太难回答了，和用OO的思想说一下你的项目一个级别的</h2><h1 id="数据库优化"><a href="#数据库优化" class="headerlink" title="数据库优化"></a>数据库优化</h1><p><a href="https://blog.csdn.net/zengdeqing2012/article/details/80972216" target="_blank" rel="noopener">数据库优化</a></p>
+<h1 id="如何设计数据库"><a href="#如何设计数据库" class="headerlink" title="如何设计数据库"></a>如何设计数据库</h1><h1 id="不依赖唯一键情况下，数据重复怎么处理"><a href="#不依赖唯一键情况下，数据重复怎么处理" class="headerlink" title="不依赖唯一键情况下，数据重复怎么处理"></a>不依赖唯一键情况下，数据重复怎么处理</h1><p>这个问题是基于我说现有项目的数据库不使用唯一键外键的情况下，问出来的。<br>对于数据的唯一性校验，在新增的时候就应该严格控制，查询的时候应该保证查询的结果是一条。但是特俗情况下（人为操作失误，或者大数据并发的情况下）可能造成数据库有重复唯一键的情况，结果将会导致查询的结果包括多条。公司现有的做法是查询列表，判断列表大小是否大于1，大于会报错。</p>
+<h1 id="aop"><a href="#aop" class="headerlink" title="aop"></a>aop</h1><p><a href="https://blog.csdn.net/dadiyang/article/details/82920139" target="_blank" rel="noopener">aop</a></p>
+<h1 id="ioc"><a href="#ioc" class="headerlink" title="ioc"></a>ioc</h1><p><a href="https://www.cnblogs.com/shan1393/p/8997429.html" target="_blank" rel="noopener">ioc</a></p>
+<h1 id="redis的数据结构有哪些"><a href="#redis的数据结构有哪些" class="headerlink" title="redis的数据结构有哪些"></a>redis的数据结构有哪些</h1><p><a href="https://segmentfault.com/a/1190000012374621?utm_source=tag-newest" target="_blank" rel="noopener">redis的数据结构有哪些</a></p>
+<h1 id="mybatis和hibernate的区别"><a href="#mybatis和hibernate的区别" class="headerlink" title="mybatis和hibernate的区别"></a>mybatis和hibernate的区别</h1><p><a href="https://www.jianshu.com/p/2ce9fa199db4" target="_blank" rel="noopener">mybatis和hibernate的区别</a></p>
+<h1 id="项目管理做了什么"><a href="#项目管理做了什么" class="headerlink" title="项目管理做了什么"></a>项目管理做了什么</h1><p>参与需求讨论，复制后台项目的设计，包括数据库设计和接口设计。编写开发文档、接口文档、设计文档，给后台团队分配任务，进行考核。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>还太年轻了</p>
+<p><img src="https://source.unsplash.com/random" alt=""></p>
+
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/12/11/springboot-pgsql-时间查询遇见的小问题/" >
-            
-                <span>springboot+pgsql 时间查询遇见的小问题</span>
-        </a>
-        <div class="abstract-content">
-            <p>又是一周没写博客，想起来就写一个刚遇见的小问题吧<br>
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://shiyuquan.github.io">大腿君的大腿君</a>
+            <p>原文链接：<a href="https://shiyuquan.github.io/2019/07/03/面试-2019年7月3日/">https://shiyuquan.github.io/2019/07/03/面试-2019年7月3日/</a>
+            <p>发表日期：<a href="https://shiyuquan.github.io/2019/07/03/面试-2019年7月3日/">2019-07-03 17:41:31</a>
+            <p>更新日期：<a href="https://shiyuquan.github.io/2019/07/03/面试-2019年7月3日/">2019-07-03 19:43:40</a>
+            <p>版权声明：来自于<a rel="license" href="">大腿</a>的许可</p>
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/11</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "springboot">springboot</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "posrtgresql">posrtgresql</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/12/03/Mybatas-Plus-配置实体类公共字段/" >
-            
-                <span>Mybatas Plus 配置实体类公共字段</span>
-        </a>
-        <div class="abstract-content">
-            <p>这段时间接的一个项目，建表要求有公共字段，持久层框架使用MP，有提供支持直接使用，操作很简单。<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/12/03</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "java">java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "springboot">springboot</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "mybatis">mybatis</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/24/杂谈-近期回顾/" >
-            
-                <span>杂谈-近期回顾</span>
-        </a>
-        <div class="abstract-content">
-            <p>突然想起来好久没写东西了，近期也没什么特别想写的，就回顾一下前些天的东西吧<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/24</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "杂谈">杂谈</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/15/springboot-long型ID精度丢失问题/" >
-            
-                <span>springboot long型ID精度丢失问题</span>
-        </a>
-        <div class="abstract-content">
-            <p>数据库主键设计为Long，新增查询发现id和数据库不一样，记录了解的信息。<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/15</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "java">java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "springboot">springboot</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/05/java类加载顺序/" >
-            
-                <span>java类加载顺序</span>
-        </a>
-        <div class="abstract-content">
-            <p>阅读《java编程思想》看到了java类加载的一点东西，通过查阅资料总结一下我对java类加载顺序的个人理解<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/05</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "java">java</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "jvm">jvm</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/11/01/学习工作中遇见的异常/" >
-            
-                <span>学习工作中遇见的异常</span>
-        </a>
-        <div class="abstract-content">
-            <p>自二〇一八年十一月一日 农历九月廿四 始<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/01</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "其他">其他</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/10/23/为什么c-比java快/" >
-            
-                <span>为什么c++比java快</span>
-        </a>
-        <div class="abstract-content">
-            <p>摘自《Java编程思想》 第五版<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/23</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "java">java</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/10/22/学习路线/" >
-            
-                <span>学习路线</span>
-        </a>
-        <div class="abstract-content">
-            <p>厉害的人总是让人惊叹，也不能慢了自己的脚步<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/22</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/10/22/心怀畏惧，砥砺前行/" >
-            
-                <span>心怀畏惧，砥砺前行</span>
-        </a>
-        <div class="abstract-content">
-            <p>一篇杂谈，一点感触<br>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/22</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "杂谈">杂谈</a>
-    
-</div>
-            
-        </div>
-    </article>
     
     <!-- paginator  -->
-    
-    <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/">&#60; PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">NEXT &#62;</a>
-    </nav>
-    
-</main>
-            <!-- profile -->
+    <ul class="post-paginator">
+        <li class="next">
             
-            <div class="profile">
-    <img class="profile-avatar" alt="avatar" src= /avatar/BLeg.jpg >
-    <div class="profile-name">大腿君的大腿君</div>
-    
-    <div class="profile-signature">
-        大腿的博客
-    </div>
-    
-    
-    <div class="profile-social">
-        
-    
-        
+        </li>
+        <li class="previous">
             
-                <a href="mailto:550765252@qq.com" class="iconfont-archer email" title=email ></a>
+                <div class="prevSlogan">下一篇</div>
+                <a href= "/2019/03/23/java垃圾收集算法/" title= "java垃圾收集算法">
+                    <div class="prevTitle">java垃圾收集算法</div>
+                </a>
             
-        
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
-        
-            
-                <a href="https://github.com/shiyuquan" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
     
-        
-            
-                <span class="iconfont-archer wechat" title=wechat>
-                  
-                  <img class="profile-qr" src="/assets/wechat.jpg" />
-                </span>
-            
-        
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
     
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-            
-                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
-            
-        
     
 
-    </div>
-    
-    
-        <div class="friends">
-            <div>友情链接</div>
-            
-                
-                    <span>
-                        <a href= https://github.com target="_black">github</a>
-                    </span>
-                
-            
-        </div>
-    
-    
-        <div class="about-me">
-            <a href = "/about" >ABOUT ME</a>
-        </div>
-    
-</div>
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
             
         </div>
         <footer class="footer footer-unloaded">
@@ -836,6 +564,24 @@ height:50vh;
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#怎么理解数组"><span class="toc-number">1.</span> <span class="toc-text">怎么理解数组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是数组"><span class="toc-number">1.1.</span> <span class="toc-text">什么是数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组的优缺点"><span class="toc-number">1.2.</span> <span class="toc-text">数组的优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#这个题目太难回答了，和用OO的思想说一下你的项目一个级别的"><span class="toc-number">1.3.</span> <span class="toc-text">这个题目太难回答了，和用OO的思想说一下你的项目一个级别的</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库优化"><span class="toc-number">2.</span> <span class="toc-text">数据库优化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#如何设计数据库"><span class="toc-number">3.</span> <span class="toc-text">如何设计数据库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#不依赖唯一键情况下，数据重复怎么处理"><span class="toc-number">4.</span> <span class="toc-text">不依赖唯一键情况下，数据重复怎么处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#aop"><span class="toc-number">5.</span> <span class="toc-text">aop</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ioc"><span class="toc-number">6.</span> <span class="toc-text">ioc</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#redis的数据结构有哪些"><span class="toc-number">7.</span> <span class="toc-text">redis的数据结构有哪些</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mybatis和hibernate的区别"><span class="toc-number">8.</span> <span class="toc-text">mybatis和hibernate的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#项目管理做了什么"><span class="toc-number">9.</span> <span class="toc-text">项目管理做了什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">10.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1448,6 +1194,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
